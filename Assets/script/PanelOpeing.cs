@@ -36,12 +36,18 @@ public class PanelOpeing : MonoBehaviour
     private void UnlockAllButton() {
         foreach (var button in Buttons) {
             button.interactable = true;
+            if (button.GetComponent<UIButton>())
+            {
+                button.GetComponent<UIButton>().IsSelectable = true;
+                button.GetComponent<UIButton>().OnPointerExit(null);
+            }
         }
     }
 
     private void LockAllButton() {
         foreach (var button in Buttons) {
             button.interactable = false;
+            if (button.GetComponent<UIButton>()) button.GetComponent<UIButton>().IsSelectable = false;
         }
     }
 
