@@ -20,6 +20,14 @@ namespace script
         private bool _isAttcking;
         private float _attacktimer;
 
+        public void Start() {
+            StaticData.OnZombieGain?.Invoke();
+            StaticData.ZombieCount++;
+        }
+
+        public void OnDestroy() => StaticData.ZombieLose();
+        
+
         public void Generate(GridManager gridManager) {
             GridManager = gridManager;
         }
