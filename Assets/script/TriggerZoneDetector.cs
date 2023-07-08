@@ -7,6 +7,7 @@ namespace script
     public class TriggerZoneDetector: MonoBehaviour
     {
         public List<ZombieAgent> Zombis;
+        public float MaxDistance;
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Zombi"))
@@ -21,15 +22,20 @@ namespace script
             CheckOfNull();
             if (other.gameObject.CompareTag("Zombi")) {
                 ZombieAgent z = other.GetComponent<ZombieAgent>(); 
-                if (z !=null && !Zombis.Contains(z)) {
-                    Zombis.Add(z); 
+                if (z !=null && Zombis.Contains(z)) {
+                    Zombis.Remove(z); 
                 }
             }
         }
 
         public void CheckOfNull() {
             foreach (var zombi in Zombis.ToArray()) {
-                if (zombi == null) Zombis.Remove(zombi);
+                if (zombi == null)
+                {
+                    Zombis.Remove(zombi);
+                    continue;
+                }
+                //if( Vector3.Distance(transform.position, zombi.transform.position)>MaxDistance) Zombis.Remove(zombi);
             }
         }
     }
