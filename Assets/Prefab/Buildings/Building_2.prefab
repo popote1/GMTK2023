@@ -409,9 +409,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8930111759333398457}
+  - component: {fileID: -8721929874721635865}
+  - component: {fileID: 7649004443445927521}
   m_Layer: 0
   m_Name: Building_2
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -432,6 +434,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-8721929874721635865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4407873698627039761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3a667b62d64ffcaf4f479ac5e78e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabsDebrie: {fileID: 852028776486610164, guid: ef5dd35a4459e6642b4e25d22278a17b,
+    type: 3}
+  prefabZombit: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
+    type: 3}
+  GridManager: {fileID: 0}
+  HP: 15
+  zombitToSpawn: 4
+--- !u!65 &7649004443445927521
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4407873698627039761}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2497406, y: 1.3113909, z: 1.7039528}
+  m_Center: {x: 3.3022633, y: -0.730083, z: 0.3519764}
 --- !u!1 &6717316122745062859
 GameObject:
   m_ObjectHideFlags: 0

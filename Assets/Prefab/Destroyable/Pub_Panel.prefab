@@ -92,9 +92,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6916471204712222963}
+  - component: {fileID: -6542670766125612172}
   m_Layer: 0
   m_Name: Pub_Panel
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,6 +116,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6542670766125612172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808749472502994118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5829ec5465246c685369c7555005d29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabsDebrie: {fileID: 9154473003961410669, guid: 857d7bfe87eead547bde1e6da56f432d,
+    type: 3}
+  HP: 0
 --- !u!1 &2896778988122237815
 GameObject:
   m_ObjectHideFlags: 0

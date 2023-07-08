@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3683561185213821366}
   m_Layer: 0
   m_Name: Stone_Barricade_Destroy
-  m_TagString: Untagged
+  m_TagString: WalkBlocker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -63,12 +63,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 64e6a361aa434ec4690fb292eb898441,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.969835
+      value: -10.542
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 64e6a361aa434ec4690fb292eb898441,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.11705208
+      value: 0.016
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 64e6a361aa434ec4690fb292eb898441,
         type: 3}
@@ -130,6 +130,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House_2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 64e6a361aa434ec4690fb292eb898441,
+        type: 3}
+      propertyPath: m_TagString
+      value: Destructible
+      objectReference: {fileID: 0}
     - target: {fileID: 4748155809830796525, guid: 64e6a361aa434ec4690fb292eb898441,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -142,6 +147,44 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f1b118682f778c442be62088e77be13a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64e6a361aa434ec4690fb292eb898441, type: 3}
+--- !u!1 &2560787282501313339 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 64e6a361aa434ec4690fb292eb898441,
+    type: 3}
+  m_PrefabInstance: {fileID: 3407210229741985386}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7566863755712497919
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2560787282501313339}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.522071, y: 1.3163042, z: 1.7371922}
+  m_Center: {x: 5.628987, y: -0.90958095, z: -2.8377767}
+--- !u!114 &4367575953235276870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2560787282501313339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3a667b62d64ffcaf4f479ac5e78e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabsDebrie: {fileID: 852028776486610164, guid: ef5dd35a4459e6642b4e25d22278a17b,
+    type: 3}
+  prefabZombit: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
+    type: 3}
+  GridManager: {fileID: 0}
+  HP: 15
+  zombitToSpawn: 10
 --- !u!4 &2937031796633926017 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64e6a361aa434ec4690fb292eb898441,
@@ -255,6 +298,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House_WithRoof (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bab97cb82eadf9946b7b37c9ec9c5a25,
+        type: 3}
+      propertyPath: m_TagString
+      value: Destructible
+      objectReference: {fileID: 0}
     - target: {fileID: 6476921279685529681, guid: bab97cb82eadf9946b7b37c9ec9c5a25,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -262,6 +310,44 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f1b118682f778c442be62088e77be13a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bab97cb82eadf9946b7b37c9ec9c5a25, type: 3}
+--- !u!1 &2560787281778728827 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bab97cb82eadf9946b7b37c9ec9c5a25,
+    type: 3}
+  m_PrefabInstance: {fileID: 3407210230227886634}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &9044826464391057992
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2560787281778728827}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.8063183, y: 2.1377869, z: 2.769073}
+  m_Center: {x: 2.2564507, y: -0.56889343, z: -2.880552}
+--- !u!114 &2375140150696650043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2560787281778728827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3a667b62d64ffcaf4f479ac5e78e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabsDebrie: {fileID: 852028776486610164, guid: ef5dd35a4459e6642b4e25d22278a17b,
+    type: 3}
+  prefabZombit: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
+    type: 3}
+  GridManager: {fileID: 0}
+  HP: 15
+  zombitToSpawn: 10
 --- !u!4 &2937031796181829057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bab97cb82eadf9946b7b37c9ec9c5a25,
