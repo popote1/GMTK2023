@@ -32,5 +32,7 @@ public class EditorCameraController : Editor
         Handles.DrawDottedLine(p1, p2, 1);
         Handles.color = Color.blue*new Color(1,1,1,0.2f);
         Handles.DrawAAConvexPolygon(point);
+        
+       
     }
 }

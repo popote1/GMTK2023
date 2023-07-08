@@ -11,6 +11,9 @@ namespace script
         [SerializeField] private float MoveSpeed;
         [SerializeField] private float Drag;
         [SerializeField] private GridManager GridManager;
+        [Header("Zombie Parameters")] 
+        [SerializeField] private int _hp = 3;
+        [SerializeField]private GameObject _prefabDeathPS;
         [Header("Attack Parameters")]
         [SerializeField] private float _attackDelay =2;
         [SerializeField] private int _attackDamage =1;
@@ -26,6 +29,15 @@ namespace script
         }
 
         public void OnDestroy() => StaticData.ZombieLose();
+
+        public void TakeDamage(int damage)
+        {
+            _hp -= damage;
+            if (_hp <= 0) {
+                Instantiate(_prefabDeathPS, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+        }
         
 
         public void Generate(GridManager gridManager) {
