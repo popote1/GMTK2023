@@ -84,8 +84,9 @@ namespace script
             if (_isAttcking) {
                 ManageAttack();
             }
-            else {
-                transform.forward = Rigidbody.velocity;
+            else
+            {
+                if (Rigidbody.velocity.magnitude > 0.5f) transform.forward = Rigidbody.velocity;
             }
             _animator.SetFloat("Velocity", Rigidbody.velocity.magnitude/MaxMoveSpeed);
         }

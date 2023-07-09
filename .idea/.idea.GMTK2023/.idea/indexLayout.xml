@@ -3,6 +3,7 @@
   <component name="ContentModelUserStore">
     <attachedFolders />
     <explicitIncludes>
+      <Path>../AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.settings-manager@1.0.3</Path>
       <Path>Library/PackageCache/com.unity.burst@1.7.3</Path>
       <Path>Library/PackageCache/com.unity.cinemachine@2.8.9</Path>
       <Path>Library/PackageCache/com.unity.collab-proxy@1.17.2</Path>

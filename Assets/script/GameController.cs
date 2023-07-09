@@ -8,6 +8,17 @@ namespace script
         public Camera Camera;
         public GridManager GridManager;
         public ZombieAgent PrefabsZombieAgent;
+
+        [Header("Strat Zombie")] 
+        public Transform[] zombies;
+
+        private void Start() {
+            foreach (var z in zombies) {
+                ZombieAgent zombie = Instantiate(PrefabsZombieAgent,  z.position+ new Vector3(0, 0.5f, 0),
+                    Quaternion.identity);
+                zombie.Generate(GridManager);
+            }
+        }
         
         public void Update() {
             if (Input.GetButtonDown("Fire1")) {
