@@ -46,7 +46,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.0228755, y: 0.48166955, z: 0.14774585}
-  m_Center: {x: -1.3246576, y: -0.16440898, z: 0.5090511}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!114 &8653729321821101241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56,12 +56,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 953706923026638597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5829ec5465246c685369c7555005d29, type: 3}
+  m_Script: {fileID: 11500000, guid: fb19b210d9fb22947b36601e3dc40bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefabsDebrie: {fileID: 6405118370903252875, guid: 8fb71aa5964114c43b7ab177a1bed69c,
     type: 3}
-  HP: 0
+  prefabsFX: {fileID: 5220036826837692117, guid: 398553180ba0e8b4d9aaa2cd134d7122,
+    type: 3}
 --- !u!1 &5989459054633664295
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +89,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5989459054633664295}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.3269138, y: -0.16115415, z: 0.52406037}
+  m_LocalPosition: {x: 0, y: 0.229, z: 0}
   m_LocalScale: {x: 0.7472985, y: 0.7472985, z: 0.7472985}
   m_ConstrainProportionsScale: 0
   m_Children: []

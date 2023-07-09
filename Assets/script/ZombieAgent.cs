@@ -14,6 +14,7 @@ namespace script
         [Header("Zombie Parameters")] 
         [SerializeField] private int _hp = 3;
         [SerializeField]private GameObject _prefabDeathPS;
+        [SerializeField] private Animator _animator;
         [Header("Attack Parameters")]
         [SerializeField] private float _attackDelay =2;
         [SerializeField] private int _attackDamage =1;
@@ -62,6 +63,7 @@ namespace script
             if (_attacktimer >= _attackDelay) {
                 _target.TakeDamage(_attackDamage);
                 _attacktimer = 0;
+                _animator.SetTrigger("Attack");
                 Instantiate(_prefabsAttackEffect, transform.position, quaternion.identity);
             }
         }
@@ -73,6 +75,7 @@ namespace script
             else {
                 transform.forward = Rigidbody.velocity;
             }
+            _animator.SetFloat("Velocity", Rigidbody.velocity.magnitude/MaxMoveSpeed);
         }
 
         private void OnCollisionEnter(Collision other) {

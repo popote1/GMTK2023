@@ -46,13 +46,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3a667b62d64ffcaf4f479ac5e78e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabsDebrie: {fileID: 852028776486610164, guid: ef5dd35a4459e6642b4e25d22278a17b,
+  prefabsDebrie: {fileID: 15596985214984911, guid: ae8e23885e5e61847991ecde0ff3e7e0,
     type: 3}
   prefabZombit: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
     type: 3}
   GridManager: {fileID: 0}
   HP: 10
+  PrefabsDestruciotnParticules: {fileID: 8935802738614449913, guid: 23258952a84d5cf468595607629a4bd8,
+    type: 3}
   zombitToSpawn: 4
+  SpawnOffset: {x: 0, y: 0.5, z: 0}
+  RandomRange: 1
 --- !u!65 &4177557675563811916
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -65,7 +69,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.7340202, y: 1.9580781, z: 2.6850717}
-  m_Center: {x: 7.3352566, y: -0.47903907, z: 0.68264306}
+  m_Center: {x: 0, y: 0.96, z: 0}
 --- !u!1001 &3611987017910704635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -96,17 +100,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b19fea5ecf0399e498c237194a5e8f86,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.0701637
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b19fea5ecf0399e498c237194a5e8f86,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.17705202
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b19fea5ecf0399e498c237194a5e8f86,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.559515
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b19fea5ecf0399e498c237194a5e8f86,
         type: 3}
@@ -158,6 +162,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 090779ebee374d847921b4d8135e1f41, type: 2}
+    - target: {fileID: -4763649331068208114, guid: b19fea5ecf0399e498c237194a5e8f86,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4763649331068208114, guid: b19fea5ecf0399e498c237194a5e8f86,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4763649331068208114, guid: b19fea5ecf0399e498c237194a5e8f86,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -3289975898811445032, guid: b19fea5ecf0399e498c237194a5e8f86,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

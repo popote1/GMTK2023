@@ -190,7 +190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054312028792788268}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.7278996, y: -1.4622083, z: -2.8701644}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8387819, y: 0.5978128, z: 0.64271}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -392,7 +392,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3538898938965225181}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.3898363, y: 0.17705202, z: 3.208561}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -446,13 +446,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3a667b62d64ffcaf4f479ac5e78e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabsDebrie: {fileID: 852028776486610164, guid: ef5dd35a4459e6642b4e25d22278a17b,
+  prefabsDebrie: {fileID: 527443353758109618, guid: f119a6fb5b8889b488b46d165ec96eb8,
     type: 3}
   prefabZombit: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
     type: 3}
   GridManager: {fileID: 0}
   HP: 15
+  PrefabsDestruciotnParticules: {fileID: 8935802738614449913, guid: 23258952a84d5cf468595607629a4bd8,
+    type: 3}
   zombitToSpawn: 4
+  SpawnOffset: {x: 0, y: 0.5, z: 0}
+  RandomRange: 1
 --- !u!65 &7649004443445927521
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -465,7 +469,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.2497406, y: 1.3113909, z: 1.7039528}
-  m_Center: {x: 3.3022633, y: -0.730083, z: 0.3519764}
+  m_Center: {x: 0, y: 0.47, z: 0}
 --- !u!1 &6717316122745062859
 GameObject:
   m_ObjectHideFlags: 0

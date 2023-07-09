@@ -125,6 +125,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 090779ebee374d847921b4d8135e1f41, type: 2}
+    - target: {fileID: -4763649331068208114, guid: b19fea5ecf0399e498c237194a5e8f86,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4763649331068208114, guid: b19fea5ecf0399e498c237194a5e8f86,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4763649331068208114, guid: b19fea5ecf0399e498c237194a5e8f86,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -3289975898811445032, guid: b19fea5ecf0399e498c237194a5e8f86,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -165,7 +180,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.7316265, y: 2.2324026, z: 2.6051989}
-  m_Center: {x: 2.241735, y: -0.5582768, z: -2.9107342}
+  m_Center: {x: 0, y: 0.95, z: 0}
 --- !u!114 &2892216539596244490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,13 +193,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3a667b62d64ffcaf4f479ac5e78e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabsDebrie: {fileID: 852028776486610164, guid: ef5dd35a4459e6642b4e25d22278a17b,
+  prefabsDebrie: {fileID: 8522946641476728923, guid: 88c7f802afe1f6d459db45198f382afd,
     type: 3}
   prefabZombit: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
     type: 3}
   GridManager: {fileID: 0}
   HP: 15
+  PrefabsDestruciotnParticules: {fileID: 8935802738614449913, guid: 23258952a84d5cf468595607629a4bd8,
+    type: 3}
   zombitToSpawn: 6
+  SpawnOffset: {x: 0, y: 0.5, z: 0}
+  RandomRange: 1
 --- !u!4 &5324900675951700473 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b19fea5ecf0399e498c237194a5e8f86,
@@ -283,6 +302,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9848179a8efd92f49b7496d3965ba386, type: 2}
+    - target: {fileID: -260760201661733405, guid: 64e6a361aa434ec4690fb292eb898441,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -260760201661733405, guid: 64e6a361aa434ec4690fb292eb898441,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -260760201661733405, guid: 64e6a361aa434ec4690fb292eb898441,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 64e6a361aa434ec4690fb292eb898441,
         type: 3}
       propertyPath: m_Name
@@ -323,7 +357,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.2023263, y: 1.3058403, z: 1.5815469}
-  m_Center: {x: 5.744724, y: -0.888304, z: -2.835316}
+  m_Center: {x: 0, y: 0.37, z: 0}
 --- !u!114 &841757864898593595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,13 +370,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3a667b62d64ffcaf4f479ac5e78e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabsDebrie: {fileID: 852028776486610164, guid: ef5dd35a4459e6642b4e25d22278a17b,
+  prefabsDebrie: {fileID: 527443353758109618, guid: f119a6fb5b8889b488b46d165ec96eb8,
     type: 3}
   prefabZombit: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
     type: 3}
   GridManager: {fileID: 0}
   HP: 15
+  PrefabsDestruciotnParticules: {fileID: 8935802738614449913, guid: 23258952a84d5cf468595607629a4bd8,
+    type: 3}
   zombitToSpawn: 6
+  SpawnOffset: {x: 0, y: 0.5, z: 0}
+  RandomRange: 1
 --- !u!4 &5324900675068471995 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64e6a361aa434ec4690fb292eb898441,

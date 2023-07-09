@@ -45,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.7729864, y: 1, z: 1}
-  m_Center: {x: -0.031215727, y: 0, z: 0}
+  m_Size: {x: 2.66, y: 2.03, z: 2.7}
+  m_Center: {x: 0, y: 1.03, z: 0}
 --- !u!114 &8652826025853435063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,13 +59,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3a667b62d64ffcaf4f479ac5e78e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabsDebrie: {fileID: 852028776486610164, guid: ef5dd35a4459e6642b4e25d22278a17b,
+  prefabsDebrie: {fileID: 8522946641476728923, guid: 88c7f802afe1f6d459db45198f382afd,
     type: 3}
   prefabZombit: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
     type: 3}
   GridManager: {fileID: 0}
   HP: 15
+  PrefabsDestruciotnParticules: {fileID: 8935802738614449913, guid: 23258952a84d5cf468595607629a4bd8,
+    type: 3}
   zombitToSpawn: 10
+  SpawnOffset: {x: 0, y: 0.5, z: 0}
+  RandomRange: 1
 --- !u!1001 &3053912096898986235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -96,17 +100,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bab97cb82eadf9946b7b37c9ec9c5a25,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.8701649
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bab97cb82eadf9946b7b37c9ec9c5a25,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.21705198
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bab97cb82eadf9946b7b37c9ec9c5a25,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.2595148
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bab97cb82eadf9946b7b37c9ec9c5a25,
         type: 3}
@@ -158,6 +162,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 090779ebee374d847921b4d8135e1f41, type: 2}
+    - target: {fileID: -4763649331068208114, guid: bab97cb82eadf9946b7b37c9ec9c5a25,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4763649331068208114, guid: bab97cb82eadf9946b7b37c9ec9c5a25,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4763649331068208114, guid: bab97cb82eadf9946b7b37c9ec9c5a25,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -3823964569158747864, guid: bab97cb82eadf9946b7b37c9ec9c5a25,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

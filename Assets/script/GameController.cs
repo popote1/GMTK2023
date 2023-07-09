@@ -16,7 +16,7 @@ namespace script
                     Debug.Log("Hit");
                     GridManager.ColorCell(hit.point);
                     Cell cell = GridManager.GetCellFromWorldPos(hit.point);
-                    GridManager.CalculatFlowField(cell);
+                    GridManager.StartCalcFlowfield(cell);
                 }
             }
             

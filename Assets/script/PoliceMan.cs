@@ -8,6 +8,7 @@ namespace script
     public class PoliceMan:MonoBehaviour
     {
         public TriggerZoneDetector TriggerZoneDetector;
+        public Animator Animator;
         [Header("Attacks")] 
         public float AttackDelay;
         public int AttackDamage;
@@ -21,6 +22,14 @@ namespace script
         
         private float _timer;
 
+        public void Start()
+        {
+            GridManager = GridManager.Instance;
+            if( !GridManager) Debug.LogWarning(" GridManager non Assigner sur Maison "+name);
+            TriggerZoneDetector.MaxDistance = AttackRange;
+            TriggerZoneDetector.transform.GetComponent<SphereCollider>().radius = AttackRange;
+        }
+
         public void Update()
         {
             if (Target == null) {
@@ -31,6 +40,7 @@ namespace script
                 }
             }
             else ManagerFire();
+            Animator.SetBool("HaveTarget", Target!= null);
         }
 
         public void ManagerFire() {
