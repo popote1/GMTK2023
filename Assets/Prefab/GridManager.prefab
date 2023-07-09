@@ -45,15 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ae51a186d947a786162ba82d3e8586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Size: {x: 20, y: 40}
-  Offset: {x: -9.5, y: 0.5, z: 0.5}
+  Size: {x: 150, y: 75}
+  Offset: {x: 0, y: 0.5, z: 0.5}
   PrefabsDebugCell: {fileID: 5017479785519899234, guid: 3a26a0dd70280e14e9eebd682a22030a,
     type: 3}
   DisplayDebugDirection: 0
   MoveCost: 10
   DiagonalMoveCost: 14
   IsCalculating: 0
-  CellParFrame: 500
+  CellParFrame: 2000
 --- !u!114 &5713922494004897928
 MonoBehaviour:
   m_ObjectHideFlags: 0

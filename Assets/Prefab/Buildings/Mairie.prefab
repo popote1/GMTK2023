@@ -211,9 +211,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3723401510781366410}
   - component: {fileID: 3868312568681308035}
+  - component: {fileID: 2211134281247026699}
   m_Layer: 0
   m_Name: Mairie
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -247,6 +248,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.902921, y: 3.6725924, z: 3.287565}
   m_Center: {x: 0.007471323, y: 1.5535802, z: 0.006451726}
+--- !u!114 &2211134281247026699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100524569351612976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d5bc3d8c95421bb1a6a33bd8d5f17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 50
 --- !u!1 &5050716564853104928
 GameObject:
   m_ObjectHideFlags: 0
