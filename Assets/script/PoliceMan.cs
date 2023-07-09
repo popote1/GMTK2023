@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace script
 {
@@ -19,6 +20,12 @@ namespace script
         public ZombieAgent PrefabsZombieAgent;
         public GridManager GridManager;
         public GameObject PrefabsDeathPS;
+        [Header("Sound")]
+        public AudioSource AudioSource;
+        public AudioClip[] ShotingSound;
+        public AudioClip[] GettingTarget;
+        public AudioClip[] GetKill;
+        
         
         private float _timer;
 
@@ -37,6 +44,8 @@ namespace script
                 if (TriggerZoneDetector.Zombis.Count > 0)
                 {
                     Target =GetTheClosest(TriggerZoneDetector.Zombis);
+                    AudioSource.clip = GettingTarget[Random.Range(0, GettingTarget.Length)];
+                    AudioSource.Play();
                 }
             }
             else ManagerFire();
@@ -55,6 +64,8 @@ namespace script
             if (_timer >= AttackDelay) {
                 Target.TakeDamage(AttackDamage);
                 PSAttack.Play();
+                AudioSource.clip = ShotingSound[Random.Range(0, ShotingSound.Length)];
+                AudioSource.Play();
                 _timer = 0;
             }
         }
@@ -76,6 +87,7 @@ namespace script
                 ZombieAgent z =Instantiate(PrefabsZombieAgent, transform.position, quaternion.identity);
                 z.Generate(GridManager);
                 Instantiate(PrefabsDeathPS, transform.position, Quaternion.identity);
+                AudioSource.PlayClipAtPoint(GetKill[Random.Range(0,GetKill.Length)], transform.position);
                 Destroy(gameObject);
             }
         }

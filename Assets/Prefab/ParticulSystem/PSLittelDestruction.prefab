@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2189482088884428458}
   - component: {fileID: 8900693986878537927}
   - component: {fileID: 5452919518594904284}
+  - component: {fileID: 8447260722544274425}
   m_Layer: 0
   m_Name: PSLittelDestruction
   m_TagString: Untagged
@@ -4879,3 +4880,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8447260722544274425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714804891266507741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f38521868962643a5c6e2c1f97b24b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Delay: 5

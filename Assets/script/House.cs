@@ -13,6 +13,8 @@ namespace script
         public int zombitToSpawn = 4;
         public Vector3 SpawnOffset = new Vector3(0, 0.5f, 0);
         public float RandomRange = 1;
+        [Header(("Sounds"))] public AudioSource AudioSource;
+        public AudioClip[] HitSounds;
 
         private void Start()
         {
