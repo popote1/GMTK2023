@@ -3873,6 +3873,11 @@ PrefabInstance:
       propertyPath: Offset.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5713922494004897930, guid: cb7eeefc434f8f9469c648b54a3dd7df,
+        type: 3}
+      propertyPath: CellParFrame
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 5713922494004897931, guid: cb7eeefc434f8f9469c648b54a3dd7df,
         type: 3}
       propertyPath: m_Name

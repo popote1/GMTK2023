@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,10 @@ namespace script {
         public bool DisplayDebugDirection;
         public int MoveCost=10;
         public int DiagonalMoveCost = 14;
+
+        public Cell Origin;
+        public bool IsCalculating;
+        public int CellParFrame = 500; 
         private Cell[,] _cells;
 
         public static GridManager Instance;
@@ -56,6 +61,55 @@ namespace script {
             return GetCellFromPos(Mathf.RoundToInt(pos.x ), Mathf.RoundToInt(pos.z ));
         }
 
+
+        public void StartCalcFlowfield(Cell origin)
+        {
+            if (!IsCalculating)
+            {
+                StartCoroutine("CalculatFlowFieldC", origin);
+                IsCalculating = true;
+            }
+        }
+
+        IEnumerator CalculatFlowFieldC(Cell origin)
+        {
+            int counter=0;
+            foreach (var cell in _cells) {
+                if(cell== null) continue;
+                cell.ClearPathFindingData();
+            }
+
+            List<Cell> openList = new List<Cell>();
+            origin.MoveCost = 0;
+            origin.TotalMoveCost = 0;
+            openList.Add(origin);
+            while (openList.Count>0) {
+                if (counter >= CellParFrame) {
+                    counter = 0;
+                    yield return new WaitForSeconds(0.01f);
+                }
+
+                counter++;
+                Cell cell = openList[0];
+                Cell[] neighbors = GetNeighbors(cell);
+
+                for (int i = 0; i < neighbors.Length; i++) {
+                    if (neighbors[i] == null) continue;
+
+                    int movecost = MoveCost;
+                    if (i == 0 || i == 2 || i == 4 || i == 6) movecost = DiagonalMoveCost;
+                    if (neighbors[i].TotalMoveCost > cell.TotalMoveCost + movecost+neighbors[i].MoveCost) {
+                        neighbors[i].TotalMoveCost = cell.TotalMoveCost + movecost+neighbors[i].MoveCost;
+                        neighbors[i].FromCell = cell;
+                        neighbors[i].DirectionTarget = ((Vector2) (cell.pos - neighbors[i].pos)).normalized;
+                        if (!openList.Contains(neighbors[i]))openList.Add(neighbors[i]); 
+                    }
+                }
+                openList.Remove(cell);
+            }
+
+            IsCalculating = false;
+        }
         public void CalculatFlowField(Cell origin)
         {
             foreach (var cell in _cells) {
@@ -67,24 +121,12 @@ namespace script {
             origin.MoveCost = 0;
             origin.TotalMoveCost = 0;
             openList.Add(origin);
-            Cell[] neighbors= new Cell[8];
+            
             
             while (openList.Count>0) {
                 Cell cell = openList[0];
+                Cell[] neighbors = GetNeighbors(cell);
 
-                for (int i = 0; i < 8; i++) {
-                    neighbors[i] = null;
-                }
-                neighbors[0] = GetCellFromPos(cell.pos.x - 1, cell.pos.y + 1);
-                neighbors[1] = GetCellFromPos(cell.pos.x , cell.pos.y + 1);
-                neighbors[2] = GetCellFromPos(cell.pos.x + 1, cell.pos.y + 1);
-                neighbors[3] = GetCellFromPos(cell.pos.x + 1, cell.pos.y);
-                neighbors[4] = GetCellFromPos(cell.pos.x + 1, cell.pos.y - 1);
-                neighbors[5] = GetCellFromPos(cell.pos.x , cell.pos.y - 1);
-                neighbors[6] = GetCellFromPos(cell.pos.x - 1, cell.pos.y - 1);
-                neighbors[7] = GetCellFromPos(cell.pos.x - 1, cell.pos.y );
-                
-                
                 for (int i = 0; i < neighbors.Length; i++) {
                     if (neighbors[i] == null) continue;
 
