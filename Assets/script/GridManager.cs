@@ -17,6 +17,18 @@ namespace script {
         public int DiagonalMoveCost = 14;
         private Cell[,] _cells;
 
+        public static GridManager Instance;
+
+        private void Awake()
+        {
+            if (Instance != null) {
+                Debug.LogWarning(" GridManager Déjà référencer");
+                Destroy(gameObject);
+            }
+            else {
+                Instance = this;
+            }
+        }
 
         public void Start()
         {
