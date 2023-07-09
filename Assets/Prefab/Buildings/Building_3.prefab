@@ -54,7 +54,7 @@ MonoBehaviour:
   HP: 10
   PrefabsDestruciotnParticules: {fileID: 8935802738614449913, guid: 23258952a84d5cf468595607629a4bd8,
     type: 3}
-  zombitToSpawn: 4
+  zombitToSpawn: 3
   SpawnOffset: {x: 0, y: 0.5, z: 0}
   RandomRange: 1
 --- !u!65 &4177557675563811916
