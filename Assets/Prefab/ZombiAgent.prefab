@@ -104,14 +104,18 @@ MonoBehaviour:
   MoveSpeed: 10
   Drag: 0.05
   GridManager: {fileID: 0}
-  _hp: 3
+  _hp: 2
   _prefabDeathPS: {fileID: 540054392838581951, guid: 0af1e0599763dda47be91aad1e77c51d,
     type: 3}
   _animator: {fileID: 6616199045370517167}
-  _attackDelay: 2
+  _attackDelay: 1
   _attackDamage: 1
   _prefabsAttackEffect: {fileID: 4266808841945952343, guid: 81a00df2fec0e814e95ed6e1c27414ba,
     type: 3}
+  _audioMixer: {fileID: 0}
+  _audioSource: {fileID: 0}
+  _attackSound: []
+  _dieSound: []
 --- !u!136 &1891030187320269572
 CapsuleCollider:
   m_ObjectHideFlags: 0
