@@ -201,7 +201,7 @@ MonoBehaviour:
   HP: 15
   PrefabsDestruciotnParticules: {fileID: 8935802738614449913, guid: 23258952a84d5cf468595607629a4bd8,
     type: 3}
-  zombitToSpawn: 6
+  zombitToSpawn: 3
   SpawnOffset: {x: 0, y: 0.5, z: 0}
   RandomRange: 1
   AudioSource: {fileID: 3273778072289631468}
@@ -480,7 +480,7 @@ MonoBehaviour:
   HP: 15
   PrefabsDestruciotnParticules: {fileID: 8935802738614449913, guid: 23258952a84d5cf468595607629a4bd8,
     type: 3}
-  zombitToSpawn: 6
+  zombitToSpawn: 2
   SpawnOffset: {x: 0, y: 0.5, z: 0}
   RandomRange: 1
   AudioSource: {fileID: 232040424903919898}
