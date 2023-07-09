@@ -1,6 +1,8 @@
 ﻿using System;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Audio;
+using Random = UnityEngine.Random;
 
 namespace script
 {
@@ -19,6 +21,11 @@ namespace script
         [SerializeField] private float _attackDelay =2;
         [SerializeField] private int _attackDamage =1;
         [SerializeField] private GameObject _prefabsAttackEffect;
+        [Header("Audio")]
+        [SerializeField] private AudioMixer _audioMixer;
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip[] _attackSound;
+        [SerializeField] private AudioClip[] _dieSound;
 
         private IDestructible _target;
         private bool _isAttcking;
@@ -64,6 +71,8 @@ namespace script
                 _target.TakeDamage(_attackDamage);
                 _attacktimer = 0;
                 _animator.SetTrigger("Attack");
+                _audioSource.clip = _attackSound[Random.Range(0, _attackSound.Length)];
+                _audioSource.Play();
                 Instantiate(_prefabsAttackEffect, transform.position, quaternion.identity);
             }
         }
