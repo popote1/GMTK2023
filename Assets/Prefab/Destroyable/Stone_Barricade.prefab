@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6963551852834703657}
   - component: {fileID: 4631457439927416621}
+  - component: {fileID: 9160449495873622212}
   m_Layer: 0
   m_Name: Stone_Barricade
   m_TagString: WalkBlocker
@@ -48,6 +49,19 @@ MonoBehaviour:
   prefabsDebrie: {fileID: 6107980930540860389, guid: 7598f3dc52c7d324591b7202a94666b9,
     type: 3}
   HP: 0
+--- !u!65 &9160449495873622212
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382072583754976133}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.19, y: 1, z: 0.55}
+  m_Center: {x: 0, y: 0.19, z: 0}
 --- !u!1 &7768910968778315411
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +88,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7768910968778315411}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.05951035, z: 0}
+  m_LocalPosition: {x: 0, y: 0.285, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
