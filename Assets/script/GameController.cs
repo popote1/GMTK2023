@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace script
@@ -8,6 +9,7 @@ namespace script
         public Camera Camera;
         public GridManager GridManager;
         public ZombieAgent PrefabsZombieAgent;
+        public GameObject Arrow;
 
         [Header("Strat Zombie")] 
         public Transform[] zombies;
@@ -24,8 +26,7 @@ namespace script
             if (Input.GetButtonDown("Fire1")) {
                 RaycastHit hit;
                 if (Physics.Raycast(Camera.ScreenPointToRay(Input.mousePosition), out hit)) {
-                    Debug.Log("Hit");
-                    GridManager.ColorCell(hit.point);
+                    if (Arrow) Instantiate(Arrow, hit.point, quaternion.identity);
                     Cell cell = GridManager.GetCellFromWorldPos(hit.point);
                     GridManager.StartCalcFlowfield(cell);
                 }

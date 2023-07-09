@@ -70,5 +70,6 @@ MonoBehaviour:
   GridManager: {fileID: 5713922494004897930}
   PrefabsZombieAgent: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
     type: 3}
+  Arrow: {fileID: 4273860963922521599, guid: 84820d68a409195479711f20bbb8aeb9, type: 3}
   zombies:
   - {fileID: 0}

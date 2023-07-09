@@ -32,8 +32,8 @@ namespace script
         private float _attacktimer;
 
         public void Start() {
-            StaticData.OnZombieGain?.Invoke();
             StaticData.ZombieCount++;
+            StaticData.OnZombieGain?.Invoke();
             _audioSource.clip = _spawnSound[Random.Range(0, _spawnSound.Length)];
             _audioSource.Play();
         }
