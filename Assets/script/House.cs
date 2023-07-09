@@ -17,7 +17,7 @@ namespace script
         private void Start()
         {
             GridManager = GridManager.Instance;
-            if( GridManager) Debug.LogWarning(" GridManager non Assigner sur Maison "+name);
+            if(!GridManager) Debug.LogWarning(" GridManager non Assigner sur Maison "+name);
         }
         
         public void TakeDamage(int damage)

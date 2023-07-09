@@ -24,6 +24,8 @@ namespace script
 
         public void Start()
         {
+            GridManager = GridManager.Instance;
+            if( !GridManager) Debug.LogWarning(" GridManager non Assigner sur Maison "+name);
             TriggerZoneDetector.MaxDistance = AttackRange;
             TriggerZoneDetector.transform.GetComponent<SphereCollider>().radius = AttackRange;
         }

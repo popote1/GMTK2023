@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1671801673565596049}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7116577516709822547}
   - component: {fileID: -8179051267801457259}
-  m_Layer: 0
+  - component: {fileID: 6075701194968629140}
+  m_Layer: 2
   m_Name: Cloture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,12 +74,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 4815777181031927087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5829ec5465246c685369c7555005d29, type: 3}
+  m_Script: {fileID: 11500000, guid: fb19b210d9fb22947b36601e3dc40bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefabsDebrie: {fileID: 3599853875968692038, guid: 0bc3026d7db00054e9a26f6aebf0e986,
     type: 3}
-  HP: 1
+  prefabsFX: {fileID: 5220036826837692117, guid: 398553180ba0e8b4d9aaa2cd134d7122,
+    type: 3}
+--- !u!65 &6075701194968629140
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4815777181031927087}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.12}
+  m_Center: {x: 0, y: 0.33, z: 0}
 --- !u!1 &6038752447336401592
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +105,7 @@ GameObject:
   - component: {fileID: 573729216585315634}
   - component: {fileID: 1480810611957633225}
   - component: {fileID: 2327201277561292006}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cloture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
