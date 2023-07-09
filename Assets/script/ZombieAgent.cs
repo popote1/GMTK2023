@@ -22,9 +22,9 @@ namespace script
         [SerializeField] private int _attackDamage =1;
         [SerializeField] private GameObject _prefabsAttackEffect;
         [Header("Audio")]
-        [SerializeField] private AudioMixer _audioMixer;
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioClip[] _attackSound;
+        [SerializeField] private AudioClip[] _spawnSound;
         [SerializeField] private AudioClip[] _dieSound;
 
         private IDestructible _target;
@@ -34,6 +34,8 @@ namespace script
         public void Start() {
             StaticData.OnZombieGain?.Invoke();
             StaticData.ZombieCount++;
+            _audioSource.clip = _spawnSound[Random.Range(0, _spawnSound.Length)];
+            _audioSource.Play();
         }
 
         public void OnDestroy() => StaticData.ZombieLose();
@@ -58,6 +60,7 @@ namespace script
                 if (cell == null) return;
                 Rigidbody.AddForce(new Vector3(cell.DirectionTarget.x, 0, cell.DirectionTarget.y) * MoveSpeed);
                 Rigidbody.velocity -= Rigidbody.velocity * Drag;
+                transform.position = new Vector3(transform.position.x, 0.5f,transform.position.z );
             }
         }
 

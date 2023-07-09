@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEditor.Experimental;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace script
 {
@@ -37,6 +38,11 @@ namespace script
 
         public void PlayLose() {
             PanelLose.SetActive(true);
+        }
+
+        public void ReturnToMainMenu() {
+            GridManager.Instance = null;
+            SceneManager.LoadScene(0);
         }
     }
 }
