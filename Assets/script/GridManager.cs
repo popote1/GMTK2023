@@ -67,9 +67,24 @@ namespace script {
             origin.MoveCost = 0;
             origin.TotalMoveCost = 0;
             openList.Add(origin);
+            Cell[] neighbors= new Cell[8];
+            
             while (openList.Count>0) {
                 Cell cell = openList[0];
-                Cell[] neighbors = GetNeighbors(cell);
+
+                for (int i = 0; i < 8; i++) {
+                    neighbors[i] = null;
+                }
+                neighbors[0] = GetCellFromPos(cell.pos.x - 1, cell.pos.y + 1);
+                neighbors[1] = GetCellFromPos(cell.pos.x , cell.pos.y + 1);
+                neighbors[2] = GetCellFromPos(cell.pos.x + 1, cell.pos.y + 1);
+                neighbors[3] = GetCellFromPos(cell.pos.x + 1, cell.pos.y);
+                neighbors[4] = GetCellFromPos(cell.pos.x + 1, cell.pos.y - 1);
+                neighbors[5] = GetCellFromPos(cell.pos.x , cell.pos.y - 1);
+                neighbors[6] = GetCellFromPos(cell.pos.x - 1, cell.pos.y - 1);
+                neighbors[7] = GetCellFromPos(cell.pos.x - 1, cell.pos.y );
+                
+                
                 for (int i = 0; i < neighbors.Length; i++) {
                     if (neighbors[i] == null) continue;
 
@@ -84,6 +99,14 @@ namespace script {
                 }
                 openList.Remove(cell);
             }
+        }
+
+        private bool Containe(List<Cell> list , Cell cell) {
+            for (int i = 0; i < list.Count; i++) {
+                if (list[i] == cell) return true;
+            }
+
+            return false;
         }
 
         private Cell[] GetNeighbors(Cell cell) {
