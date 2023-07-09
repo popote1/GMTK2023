@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 4159000762380030389}
   - component: {fileID: 2185172027297326463}
   - component: {fileID: 3688067654002103757}
+  - component: {fileID: 4595687746545479837}
   m_Layer: 0
   m_Name: Sand_Barricade
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,3 +98,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0288353, y: 0.7976178, z: 0.68124783}
   m_Center: {x: 0.000000059604645, y: 0.2400329, z: 0.000000044703484}
+--- !u!114 &4595687746545479837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383850580248020138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5829ec5465246c685369c7555005d29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabsDebrie: {fileID: 6556748018561779460, guid: 41feb8e8a1cc50d4e8280d6b9ed90cd2,
+    type: 3}
+  prefabsFX: {fileID: 714804891266507741, guid: a55694c4c9e3aa74db4e7daf88d92d02,
+    type: 3}
+  HP: 8

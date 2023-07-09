@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 68699690082254934}
   - component: {fileID: 5702562933323152393}
   - component: {fileID: 2272571334944787465}
+  - component: {fileID: 2025998161678736935}
   m_Layer: 0
   m_Name: Car_Roof
   m_TagString: Untagged
@@ -249,6 +250,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2025998161678736935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7306568375748985990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3b5cdc7e70d5f546a42d4a1c84e3573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MeshRenderer: {fileID: 2272571334944787465}
 --- !u!1 &8884507734381175040
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,9 +273,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8072645272392465338}
   - component: {fileID: 6593077344674801993}
+  - component: {fileID: 472026310978214533}
   m_Layer: 0
   m_Name: Car
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -297,3 +312,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8363986, y: 0.84151137, z: 1.547042}
   m_Center: {x: 0.005112529, y: 0.35020918, z: -0.007668793}
+--- !u!114 &472026310978214533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8884507734381175040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5829ec5465246c685369c7555005d29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabsDebrie: {fileID: 7295311001112072639, guid: 6a8f7ffbcaf65d04dbdb4bba51a63f0c,
+    type: 3}
+  prefabsFX: {fileID: 714804891266507741, guid: a55694c4c9e3aa74db4e7daf88d92d02,
+    type: 3}
+  HP: 7
