@@ -358,9 +358,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TriggerZoneDetector: {fileID: 7844174340184348046}
   Animator: {fileID: 6326999831858152543}
-  AttackDelay: 1
+  AttackDelay: 0.9
   AttackDamage: 1
-  AttackRange: 7
+  AttackRange: 8
   PSAttack: {fileID: 8454415356243146928}
   Target: {fileID: 0}
   PrefabsZombieAgent: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,

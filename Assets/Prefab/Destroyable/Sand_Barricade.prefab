@@ -114,4 +114,4 @@ MonoBehaviour:
     type: 3}
   prefabsFX: {fileID: 714804891266507741, guid: a55694c4c9e3aa74db4e7daf88d92d02,
     type: 3}
-  HP: 8
+  HP: 4

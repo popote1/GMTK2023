@@ -198,7 +198,7 @@ MonoBehaviour:
   prefabZombit: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
     type: 3}
   GridManager: {fileID: 0}
-  HP: 15
+  HP: 6
   PrefabsDestruciotnParticules: {fileID: 8935802738614449913, guid: 23258952a84d5cf468595607629a4bd8,
     type: 3}
   zombitToSpawn: 5
@@ -380,7 +380,7 @@ MonoBehaviour:
   prefabZombit: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
     type: 3}
   GridManager: {fileID: 0}
-  HP: 15
+  HP: 6
   PrefabsDestruciotnParticules: {fileID: 8935802738614449913, guid: 23258952a84d5cf468595607629a4bd8,
     type: 3}
   zombitToSpawn: 1

@@ -181,35 +181,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.7316265, y: 2.2324026, z: 2.6051989}
   m_Center: {x: 0, y: 0.95, z: 0}
---- !u!114 &2892216539596244490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4804787058124452675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be3a667b62d64ffcaf4f479ac5e78e9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabsDebrie: {fileID: 8522946641476728923, guid: 88c7f802afe1f6d459db45198f382afd,
-    type: 3}
-  prefabZombit: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
-    type: 3}
-  GridManager: {fileID: 0}
-  HP: 15
-  PrefabsDestruciotnParticules: {fileID: 8935802738614449913, guid: 23258952a84d5cf468595607629a4bd8,
-    type: 3}
-  zombitToSpawn: 3
-  SpawnOffset: {x: 0, y: 0.5, z: 0}
-  RandomRange: 1
-  AudioSource: {fileID: 3273778072289631468}
-  HitSounds:
-  - {fileID: 8300000, guid: be5630eb9beaba54193f4f4d40ed78af, type: 3}
-  - {fileID: 8300000, guid: 8df84cb68f00534459452823f226b19c, type: 3}
-  - {fileID: 8300000, guid: cbe0a02c13d184e4faf3329d287b559f, type: 3}
-  - {fileID: 8300000, guid: 8518b48cc91a0f040b839c4bcc43d70c, type: 3}
 --- !u!82 &3273778072289631468
 AudioSource:
   m_ObjectHideFlags: 0
@@ -306,6 +277,35 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2892216539596244490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4804787058124452675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3a667b62d64ffcaf4f479ac5e78e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabsDebrie: {fileID: 8522946641476728923, guid: 88c7f802afe1f6d459db45198f382afd,
+    type: 3}
+  prefabZombit: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
+    type: 3}
+  GridManager: {fileID: 0}
+  HP: 6
+  PrefabsDestruciotnParticules: {fileID: 8935802738614449913, guid: 23258952a84d5cf468595607629a4bd8,
+    type: 3}
+  zombitToSpawn: 4
+  SpawnOffset: {x: 0, y: 0.5, z: 0}
+  RandomRange: 1
+  AudioSource: {fileID: 3273778072289631468}
+  HitSounds:
+  - {fileID: 8300000, guid: be5630eb9beaba54193f4f4d40ed78af, type: 3}
+  - {fileID: 8300000, guid: 8df84cb68f00534459452823f226b19c, type: 3}
+  - {fileID: 8300000, guid: cbe0a02c13d184e4faf3329d287b559f, type: 3}
+  - {fileID: 8300000, guid: 8518b48cc91a0f040b839c4bcc43d70c, type: 3}
 --- !u!4 &5324900675951700473 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b19fea5ecf0399e498c237194a5e8f86,
@@ -460,35 +460,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.2023263, y: 1.3058403, z: 1.5815469}
   m_Center: {x: 0, y: 0.37, z: 0}
---- !u!114 &841757864898593595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4804787056750489601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be3a667b62d64ffcaf4f479ac5e78e9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabsDebrie: {fileID: 527443353758109618, guid: f119a6fb5b8889b488b46d165ec96eb8,
-    type: 3}
-  prefabZombit: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
-    type: 3}
-  GridManager: {fileID: 0}
-  HP: 15
-  PrefabsDestruciotnParticules: {fileID: 8935802738614449913, guid: 23258952a84d5cf468595607629a4bd8,
-    type: 3}
-  zombitToSpawn: 2
-  SpawnOffset: {x: 0, y: 0.5, z: 0}
-  RandomRange: 1
-  AudioSource: {fileID: 232040424903919898}
-  HitSounds:
-  - {fileID: 8300000, guid: be5630eb9beaba54193f4f4d40ed78af, type: 3}
-  - {fileID: 8300000, guid: 8df84cb68f00534459452823f226b19c, type: 3}
-  - {fileID: 8300000, guid: cbe0a02c13d184e4faf3329d287b559f, type: 3}
-  - {fileID: 8300000, guid: 8518b48cc91a0f040b839c4bcc43d70c, type: 3}
 --- !u!82 &232040424903919898
 AudioSource:
   m_ObjectHideFlags: 0
@@ -585,6 +556,35 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &841757864898593595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4804787056750489601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3a667b62d64ffcaf4f479ac5e78e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabsDebrie: {fileID: 527443353758109618, guid: f119a6fb5b8889b488b46d165ec96eb8,
+    type: 3}
+  prefabZombit: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
+    type: 3}
+  GridManager: {fileID: 0}
+  HP: 6
+  PrefabsDestruciotnParticules: {fileID: 8935802738614449913, guid: 23258952a84d5cf468595607629a4bd8,
+    type: 3}
+  zombitToSpawn: 4
+  SpawnOffset: {x: 0, y: 0.5, z: 0}
+  RandomRange: 1
+  AudioSource: {fileID: 232040424903919898}
+  HitSounds:
+  - {fileID: 8300000, guid: be5630eb9beaba54193f4f4d40ed78af, type: 3}
+  - {fileID: 8300000, guid: 8df84cb68f00534459452823f226b19c, type: 3}
+  - {fileID: 8300000, guid: cbe0a02c13d184e4faf3329d287b559f, type: 3}
+  - {fileID: 8300000, guid: 8518b48cc91a0f040b839c4bcc43d70c, type: 3}
 --- !u!4 &5324900675068471995 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64e6a361aa434ec4690fb292eb898441,
