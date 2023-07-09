@@ -31,15 +31,15 @@ namespace script
                 }
             }
             
-            if (Input.GetKeyDown(KeyCode.A)) {
-                RaycastHit hit;
-                if (Physics.Raycast(Camera.ScreenPointToRay(Input.mousePosition), out hit)) {
-                    Cell cell = GridManager.GetCellFromWorldPos(hit.point);
-                    ZombieAgent zombie = Instantiate(PrefabsZombieAgent, hit.point + new Vector3(0, 0.5f, 0),
-                        Quaternion.identity);
-                    zombie.Generate(GridManager);
-                }
-            }
+            //if (Input.GetKeyDown(KeyCode.A)) {
+            //    RaycastHit hit;
+            //    if (Physics.Raycast(Camera.ScreenPointToRay(Input.mousePosition), out hit)) {
+            //        Cell cell = GridManager.GetCellFromWorldPos(hit.point);
+            //        ZombieAgent zombie = Instantiate(PrefabsZombieAgent, hit.point + new Vector3(0, 0.5f, 0),
+            //            Quaternion.identity);
+            //        zombie.Generate(GridManager);
+            //    }
+            //}
         }
     }
 }
