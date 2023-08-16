@@ -13,6 +13,9 @@ namespace script
         [SerializeField] private float MoveSpeed;
         [SerializeField] private float Drag;
         [SerializeField] private GridManager GridManager;
+        [Header("Zombie Reference")]
+        public GameObject SelectionSprite;
+        public GameObject PSEmoteRedSquare;
         [Header("Zombie Parameters")] 
         [SerializeField] private int _hp = 3;
         [SerializeField]private GameObject _prefabDeathPS;
@@ -27,9 +30,21 @@ namespace script
         [SerializeField] private AudioClip[] _spawnSound;
         [SerializeField] private AudioClip[] _dieSound;
 
+        public Subgrid Subgrid;
+        
         private IDestructible _target;
         private bool _isAttcking;
         private float _attacktimer;
+        private bool _isSelected;
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set {
+                if (SelectionSprite) SelectionSprite.SetActive(value);
+                _isSelected = value;
+            }
+        }
 
         public void Start() {
             StaticData.ZombieCount++;
@@ -55,9 +70,13 @@ namespace script
         }
 
         private void FixedUpdate() {
-            if (GridManager&&!_isAttcking) {
-                Cell cell =GridManager.GetCellFromWorldPos(transform.position);
-                if (cell == null) return;
+            if (Subgrid!=null&&!_isAttcking) {
+                Cell cell =Subgrid.GetCellFromWorldPos(transform.position);
+                if (cell == null) {
+                    PSEmoteRedSquare.SetActive(true);
+                    return;
+                }
+                PSEmoteRedSquare.SetActive(false);
                 Rigidbody.AddForce(new Vector3(cell.DirectionTarget.x, 0, cell.DirectionTarget.y) * MoveSpeed);
                 Rigidbody.velocity -= Rigidbody.velocity * Drag;
                 transform.position = new Vector3(transform.position.x, 0.5f,transform.position.z );

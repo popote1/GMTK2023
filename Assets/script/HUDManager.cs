@@ -11,6 +11,7 @@ namespace script
         public TMP_Text TxtZombieCount;
         public GameObject PanelWin;
         public GameObject PanelLose;
+        public RectTransform SelectionBox;
 
 
         private void Start() {
@@ -44,5 +45,15 @@ namespace script
             GridManager.Instance = null;
             SceneManager.LoadScene(0);
         }
+
+        public void SetSelectionBox(Vector2 pos, Vector2 Size) {
+            SelectionBox.gameObject.SetActive(true);
+            SelectionBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Size.x);
+            SelectionBox.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Size.y);
+            SelectionBox.position = pos;
+            
+        }
+
+        public void CloseSelectionBox() => SelectionBox.gameObject.SetActive(false);
     }
 }
