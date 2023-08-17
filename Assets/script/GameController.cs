@@ -137,15 +137,15 @@ namespace script
             
             
             
-            //if (Input.GetKeyDown(KeyCode.A)) {
-            //    RaycastHit hit;
-            //    if (Physics.Raycast(Camera.ScreenPointToRay(Input.mousePosition), out hit)) {
-            //        Cell cell = GridManager.GetCellFromWorldPos(hit.point);
-            //        ZombieAgent zombie = Instantiate(PrefabsZombieAgent, hit.point + new Vector3(0, 0.5f, 0),
-            //            Quaternion.identity);
-            //        zombie.Generate(GridManager);
-            //    }
-            //}
+            if (Input.GetKeyDown(KeyCode.A)) {
+                RaycastHit hit;
+                if (Physics.Raycast(Camera.ScreenPointToRay(Input.mousePosition), out hit)) {
+                    Cell cell = GridManager.GetCellFromWorldPos(hit.point);
+                    ZombieAgent zombie = Instantiate(PrefabsZombieAgent, hit.point + new Vector3(0, 0.5f, 0),
+                        Quaternion.identity);
+                    zombie.Generate(GridManager);
+                }
+            }
         }
 
         public void CalculateSelectionPathFinding(Cell targetCell)
@@ -155,9 +155,9 @@ namespace script
             foreach (var ZombieAgent in Selected)
             {
                 if (!startchunks.Contains(
-                    GridManager.GetChunkFormWorldPos(ZombieAgent.transform.position)))
+                    GridManager.GetCellFromWorldPos(ZombieAgent.transform.position).Chunk))
                 {
-                    startchunks.Add(GridManager.GetChunkFormWorldPos(ZombieAgent.transform.position));
+                    startchunks.Add(GridManager.GetCellFromWorldPos(ZombieAgent.transform.position).Chunk);
                 }
             }
 
@@ -186,13 +186,24 @@ namespace script
                 zombieAgent.Subgrid = subgrid;
             }
             GridManager.ColorAllDebugGridToColor(Color.white);
+
             foreach (var chunk in totalChunks)
             {
                 foreach (var cell in chunk.cells)
                 {
                     cell.ColorDebugCell(Color.blue);
                 }
-                //foreach (var chunk in pathChunks) {
+            }
+            foreach (var chunk in startchunks) {
+                foreach (var cell in chunk.cells) {
+                    cell.ColorDebugCell(Color.red);
+                }
+            }
+
+            foreach (var cell in targetCell.Chunk.cells) {
+                cell.ColorDebugCell(Color.green);
+            }
+            //foreach (var chunk in pathChunks) {
                 //    foreach (var cell in chunk.cells) {
                 //        cell.ColorDebugCell(Color.green);
                 //    }
@@ -203,7 +214,7 @@ namespace script
                 //        cell.ColorDebugCell(Color.yellow);
                 //    }
                 //}
-            }
+            
         }
 
 

@@ -29,7 +29,10 @@ namespace script
         [SerializeField] private AudioClip[] _attackSound;
         [SerializeField] private AudioClip[] _spawnSound;
         [SerializeField] private AudioClip[] _dieSound;
-
+        [Header("HeightOffSetting")] 
+        public float HeightOffSetting;
+        public LayerMask GroundLayer;
+        
         public Subgrid Subgrid;
         
         private IDestructible _target;
@@ -79,7 +82,7 @@ namespace script
                 PSEmoteRedSquare.SetActive(false);
                 Rigidbody.AddForce(new Vector3(cell.DirectionTarget.x, 0, cell.DirectionTarget.y) * MoveSpeed);
                 Rigidbody.velocity -= Rigidbody.velocity * Drag;
-                transform.position = new Vector3(transform.position.x, 0.5f,transform.position.z );
+                //transform.position = new Vector3(transform.position.x, 0.5f,transform.position.z );
             }
         }
 
@@ -106,6 +109,10 @@ namespace script
             else
             {
                 if (Rigidbody.velocity.magnitude > 0.5f) transform.forward = Rigidbody.velocity;
+                RaycastHit hit;
+                if (Physics.Raycast(new Ray(transform.position, Vector3.down), out hit, 4, GroundLayer)) {
+                    transform.position = new Vector3(transform.position.x, hit.point.y + HeightOffSetting, transform.position.z);
+                }
             }
             _animator.SetFloat("Velocity", Rigidbody.velocity.magnitude/MaxMoveSpeed);
         }

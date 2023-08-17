@@ -527,7 +527,9 @@ namespace script {
                 foreach (var neighbor in chunk.neighbors) {
                     neighbor.neighbors.Remove(chunk);
                 }
-                if (Rooms.Count > 1) {
+                if (Rooms.Count > 1)
+                {
+                    Vector2Int originalPos = chunk.Coordonate;
                     foreach (var cell in chunk.cells) {
                         cell.Chunk = null;
                     }
@@ -538,6 +540,7 @@ namespace script {
                         newChunk.cells = room;
                         newChunk.CalculatCenter();
                         newChunk.neighbors = GetChunksNeighbors(newChunk);
+                        newChunk.Coordonate = originalPos;
                         _Chunks.Add(newChunk);
                         
                         foreach (var cell in newChunk.cells) {
@@ -554,6 +557,7 @@ namespace script {
                     chunk.cells = Rooms[0];
                     chunk.CalculatCenter();
                     chunk.neighbors =  GetChunksNeighbors(chunk);
+                    chunk.Coordonate = chunk.Coordonate;
                     foreach (var neighbor in chunk.neighbors) {
                         if( neighbor!=null) neighbor.neighbors.Add(chunk);
                     }
