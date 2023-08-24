@@ -529,6 +529,7 @@ namespace script {
                 }
                 if (Rooms.Count > 1)
                 {
+                    Rooms = GetBlockedCells(chunk, Rooms);
                     Vector2Int originalPos = chunk.Coordonate;
                     foreach (var cell in chunk.cells) {
                         cell.Chunk = null;
@@ -553,8 +554,8 @@ namespace script {
                 }
                 else if  (Rooms.Count > 0)
                 {
-                    chunk.cells.Clear();
-                    chunk.cells = Rooms[0];
+                    //chunk.cells.Clear();
+                    //chunk.cells = Rooms[0];
                     chunk.CalculatCenter();
                     chunk.neighbors =  GetChunksNeighbors(chunk);
                     chunk.Coordonate = chunk.Coordonate;
@@ -721,6 +722,45 @@ namespace script {
                 ids[i] = _Chunks.IndexOf(chunk.neighbors[i]);
             }
             return ids;
+        }
+
+        private List<List<Cell>> GetBlockedCells(Chunk chunk , List<List<Cell>> rooms)
+        {
+            Dictionary<Cell, int> classedCell = new Dictionary<Cell, int>();
+            List<List<Cell>> newClassed = new List<List<Cell>>();
+            for (int i = 0; i < rooms.Count; i++) {
+                newClassed.Add(new List<Cell>());
+            }
+            for (int i = 0; i < rooms.Count; i++) {
+                foreach (Cell cell in rooms[i]) {
+                    classedCell.Add(cell, i);
+                }
+            }
+
+            foreach (Cell cell in chunk.cells) {
+                if (classedCell.Keys.Contains(cell)) continue;
+                newClassed[GetClosestRoom(cell, classedCell)].Add(cell);
+            }
+
+            for (int i = 0; i < newClassed.Count; i++)
+            {
+                if (newClassed.Count <= 0) continue;
+                rooms[i].AddRange(newClassed[i]);
+            }
+
+            return rooms.ToList();
+        }
+
+        private int GetClosestRoom(Cell cell, Dictionary<Cell, int> classify) {
+            float bestDistance = float.PositiveInfinity;
+            int bestRoom = 1;
+            foreach (var cellsC in classify) {
+                if (Vector2.Distance(cell.Pos, cellsC.Key.Pos) < bestDistance) {
+                    bestDistance = Vector2.Distance(cell.Pos, cellsC.Key.Pos);
+                    bestRoom = cellsC.Value;
+                }
+            }
+            return bestRoom;
         }
     }
 }
