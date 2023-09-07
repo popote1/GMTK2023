@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-
+using System.Linq;
 using UnityEngine;
 
 namespace script
@@ -9,13 +9,19 @@ namespace script
     {
         public Vector2Int Size;
         public Vector3 Offset;
-        public Cell[,] _cells;
+        private Cell[,] _cells;
+        private List<Chunk> _chunks = new List<Chunk>();
+        private Cell _targetCell;
+
+        public Cell TargetCell {
+            get => _targetCell;
+        }
 
 
-        public void GenerateSubGrid(Chunk[] chunks, Vector2Int size, Vector3 offset)
-        {
+        public void GenerateSubGrid(Chunk[] chunks, Vector2Int size, Vector3 offset) {
             Size = size;
             Offset = offset;
+            _chunks = chunks.ToList();
             _cells = new Cell[size.x*Metrics.chunkSize, size.y*Metrics.chunkSize];
             foreach (var chunk in chunks) {
                 foreach (var saveCell in chunk.cells) {
@@ -24,6 +30,19 @@ namespace script
                     cell.MoveCost = saveCell.MoveCost;
                 }
             }
+        }
+
+        public void AddChunksToSubGrid(Chunk[] newChunks) {
+            foreach (var chunk in newChunks)
+            {
+                if (_chunks.Contains(chunk)) continue;
+                foreach (var saveCell in chunk.cells) {
+                    Cell cell = _cells[saveCell.Pos.x, saveCell.Pos.y] = new Cell(saveCell.Pos, saveCell.Offset);
+                    cell.IsBlock = saveCell.IsBlock;
+                    cell.MoveCost = saveCell.MoveCost; 
+                }
+            }
+            StartCalcFlowfield(_targetCell);
         }
         
         public Cell GetCellFromPos(int x, int y) {
@@ -50,6 +69,7 @@ namespace script
         
         public void StartCalcFlowfield(Cell origin) {
             CalculatFlowFieldC(origin);
+            _targetCell = origin;
             Debug.Log("Start CalculateFlowField");
         }
         

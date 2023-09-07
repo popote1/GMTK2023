@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -6,6 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace script
 {
+    [SelectionBase]
     public class ZombieAgent : MonoBehaviour
     {
         [SerializeField] private Rigidbody Rigidbody;
@@ -75,8 +78,15 @@ namespace script
         private void FixedUpdate() {
             if (Subgrid!=null&&!_isAttcking) {
                 Cell cell =Subgrid.GetCellFromWorldPos(transform.position);
-                if (cell == null) {
-                    PSEmoteRedSquare.SetActive(true);
+                if (cell == null)
+                {
+                    Cell currentPos = GridManager.GetCellFromWorldPos(transform.position);
+                    if (currentPos == null) {
+                        PSEmoteRedSquare.SetActive(true);
+                        Debug.LogWarning("Zombie out of the Game Zone", this);
+                        return;
+                    }
+                    ManagerRecalculationOrExtraPathToSubGrid(currentPos);
                     return;
                 }
                 PSEmoteRedSquare.SetActive(false);
@@ -127,6 +137,16 @@ namespace script
                     Rigidbody.isKinematic = true;
                 }
             }
+        }
+
+        private void ManagerRecalculationOrExtraPathToSubGrid(Cell currentPos) {
+            List<Chunk> path =GridManager.GetAStartPath(currentPos.Chunk,
+                GridManager.GetCellFromPos(Subgrid.TargetCell.Pos).Chunk);
+            foreach (var neighbor in GridManager.GetNeighborsOfPath(path)) {
+                if (path.Contains(neighbor)) continue;
+                path.Add(neighbor);
+            }
+            Subgrid.AddChunksToSubGrid(path.ToArray());
         }
     }
 }

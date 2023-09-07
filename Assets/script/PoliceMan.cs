@@ -91,5 +91,12 @@ namespace script
                 Destroy(gameObject);
             }
         }
+
+        private void OnDrawGizmos() {
+            if (EditorControlStatics.DisplayEnnemisDangerZone) {
+                Gizmos.color = Color.red * new Color(1, 1, 1, 0.4f);
+                Gizmos.DrawSphere(transform.position,  AttackRange);
+            }
+        }
     }
 }

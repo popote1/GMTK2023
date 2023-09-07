@@ -34,6 +34,8 @@ namespace script {
 
         public static GridManager Instance;
 
+        public static Action OnClearPathFindingData;
+
         private void Awake()
         {
             if (Instance != null) {
@@ -59,6 +61,10 @@ namespace script {
         public Cell GetCellFromPos(int x, int y) {
             if (x < 0 || x >= Size.x*Metrics.chunkSize || y < 0 || y >= Size.y*Metrics.chunkSize) return null;
             return _cells[x, y];
+        }
+        public Cell GetCellFromPos(Vector2Int pos) {
+            if (pos.x < 0 || pos.x >= Size.x*Metrics.chunkSize || pos.y < 0 || pos.y >= Size.y*Metrics.chunkSize) return null;
+            return _cells[pos.x, pos.y];
         }
 
         public void ColorCell(Vector3 pos)
@@ -445,6 +451,7 @@ namespace script {
         
         [ContextMenu("CheckColliders")]
         public void CheckColliders() {
+            OnClearPathFindingData?.Invoke();
             foreach (var cell in _cells) {
                 cell.CheckCellColliders();
             }
