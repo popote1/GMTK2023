@@ -30,5 +30,11 @@ public class PopoteEditorDebugControlPanel : EditorWindow
       else {
          if (GUILayout.Button("Show Ennemis DangerZone")) EditorControlStatics.DisplayEnnemisDangerZone = true;
       }
+      if (EditorControlStatics.DisplayDetectionZone) {
+         if (GUILayout.Button("Hide Ennemis Detection")) EditorControlStatics.DisplayDetectionZone = false;
+      }
+      else {
+         if (GUILayout.Button("Show Ennemis Detection")) EditorControlStatics.DisplayDetectionZone = true;
+      }
    }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 using UnityEngine.Windows;
 using Random = UnityEngine.Random;
@@ -768,6 +769,31 @@ namespace script {
                 }
             }
             return bestRoom;
+        }
+
+        public Cell[] GetBreathFirstCells(Cell originCell,int range) {
+            List<Cell> openList = new List<Cell>();
+            List<Cell> closeList = new List<Cell>();
+            List<Cell> toAddList = new List<Cell>();
+            openList.Add(originCell);
+
+            for (int i = 0; i < range; i++) {
+                foreach (Cell cell in openList) {
+                    foreach (Cell neighbor in Get4Neighbors(cell)) {
+                        if (cell.IsBlock) continue;
+                        if (closeList.Contains(neighbor)) continue;
+                        if (openList.Contains(neighbor)) continue;
+                        if (toAddList.Contains(neighbor)) continue;
+                        toAddList.Add(neighbor);
+                    }
+                }
+                closeList.AddRange(openList);
+                openList.Clear();
+                openList.AddRange(toAddList);
+                toAddList.Clear();
+            }
+            closeList.AddRange(toAddList);
+            return closeList.ToArray();
         }
     }
 }

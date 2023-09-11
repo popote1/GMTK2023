@@ -23,6 +23,7 @@ namespace script
         public LayerMask SelectingLayer;
         public List<ZombieAgent> Selected = new List<ZombieAgent>();
         public GameObject DebugCube;
+        
 
         private Vector2Int originChunkTarget = new Vector2Int(0, 0);
         private bool _isInSelectionBox;
@@ -152,8 +153,8 @@ namespace script
         {
             List<Chunk> startchunks = new List<Chunk>();
             List<Chunk> pathChunks = new List<Chunk>();
-            foreach (var ZombieAgent in Selected)
-            {
+            foreach (var ZombieAgent in Selected) {
+                if (ZombieAgent == null) continue;
                 if (!startchunks.Contains(
                     GridManager.GetCellFromWorldPos(ZombieAgent.transform.position).Chunk))
                 {
@@ -241,6 +242,8 @@ namespace script
             points2D[2] = Input.mousePosition;
             points2D[3] = new Vector2(Input.mousePosition.x, _startSelectionBox.y);
 
+
+            if (_startSelectionBox == (Vector2)Input.mousePosition) return;
             RaycastHit hit;
             for (int i = 0; i < points2D.Length; i++) {
                 if (Physics.Raycast(Camera.ScreenPointToRay(points2D[i]), out hit)) {
