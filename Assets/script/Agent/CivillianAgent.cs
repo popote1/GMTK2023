@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
@@ -34,6 +35,9 @@ namespace script
         [SerializeField] private float RunAwayMoveSpeed =30;
         [SerializeField] private float SlowMoveSpeed = 5;
         [SerializeField] private float StaminaRegenRate = 0.5f;
+
+        public ZombieAgent PrefabsZombieAgent;
+        public GameObject PrefabsDeathPS;
         
         [Header("Audio")]
         [SerializeField] private AudioSource _audioSource;
@@ -155,6 +159,14 @@ namespace script
 
             return bestcell;
         }
+        private void OnCollisionEnter(Collision other) {
+            if (other.gameObject.CompareTag("Zombi")) {
+                ZombieAgent z =Instantiate(PrefabsZombieAgent, transform.position, quaternion.identity);
+                z.Generate(GridManager);
+                Instantiate(PrefabsDeathPS, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+        }
 
         private void ManageMoveSpeed()
         {
@@ -183,7 +195,8 @@ namespace script
             List<Chunk> totalChunks = GridManager.GetAStartPath(currentcell.Chunk , _wonderingTarget.Chunk);
             _subgrid = new Subgrid();
             _subgrid.GenerateSubGrid(totalChunks.ToArray(), GridManager.Size, GridManager.Offset);
-            _subgrid.StartCalcFlowfield(_wonderingTarget);
+            //_subgrid.StartCalcFlowfield(_subgrid.TargetCell);
+            _subgrid.StartCalcFlowfield(new[]{_wonderingTarget});
         }
 
         private void OnDrawGizmos()

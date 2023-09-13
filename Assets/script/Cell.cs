@@ -45,10 +45,10 @@ namespace script
             DebugCell.Render.color = col;
         }
 
-        public void CheckCellColliders()
-        {
+        public void CheckCellColliders() {
             IsBlock = false;
-            Collider[]cols =Physics.OverlapBox(WordPos,Vector3.one/2f);
+           // Collider[]cols =Physics.OverlapBox(WordPos,Vector3.one/2f);
+            Collider[]cols =Physics.OverlapBox(WordPos,Metrics.cellColliderBockSize);
             if (cols.Length > 0) {
                 foreach (var col in cols) {
                     if (col.gameObject.CompareTag("WalkBlocker")) {
@@ -65,8 +65,6 @@ namespace script
                         return;
                     }
                 }
-                
-                
             }
             else
             {
@@ -74,6 +72,16 @@ namespace script
                 ColorDebugCell(ColorFree );
                 MoveCost = GridManager.FreeWalkMoveCos;
             }
+        }
+
+        public bool CheckCellColliderContain(GameObject target) {
+            Collider[]cols =Physics.OverlapBox(WordPos,Metrics.cellColliderBockSize);
+            if (cols.Length > 0) {
+                foreach (var col in cols) {
+                    if (col.gameObject==target) return true;
+                }
+            }
+            return false;
         }
         public void ClearPathFindingData() {
             TotalMoveCost = Int32.MaxValue;

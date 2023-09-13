@@ -141,7 +141,7 @@ namespace script
 
         private void ManagerRecalculationOrExtraPathToSubGrid(Cell currentPos) {
             List<Chunk> path =GridManager.GetAStartPath(currentPos.Chunk,
-                GridManager.GetCellFromPos(Subgrid.TargetCell.Pos).Chunk);
+                GridManager.GetCellFromPos(Subgrid.TargetPos).Chunk);
             foreach (var neighbor in GridManager.GetNeighborsOfPath(path)) {
                 if (path.Contains(neighbor)) continue;
                 path.Add(neighbor);

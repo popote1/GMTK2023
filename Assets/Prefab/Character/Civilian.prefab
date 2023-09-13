@@ -1048,20 +1048,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 8776133592687920192}
   MaxMoveSpeed: 3
-  MoveSpeed: 15
   Drag: 0.05
   GridManager: {fileID: 0}
   _hp: 3
-  _prefabDeathPS: {fileID: 0}
+  _prefabDeathPS: {fileID: 540054392838581951, guid: 0af1e0599763dda47be91aad1e77c51d,
+    type: 3}
   _animator: {fileID: 2865205535390336310}
   WonderringDelayMin: 1
   WonderringDelayMax: 10
   Wonderringdistance: 5
+  DetectionDistance: 10
+  TriggerZoneDetector: {fileID: 762801531907399770}
+  RunAwayDistance: 10
+  MaxStamina: 10
+  MoveSpeed: 15
+  RunAwayMoveSpeed: 30
+  SlowMoveSpeed: 5
+  StaminaRegenRate: 0.5
+  PrefabsZombieAgent: {fileID: 2444219041533692552, guid: adf5d6fdbd056e04790ca9363b48d07c,
+    type: 3}
+  PrefabsDeathPS: {fileID: 540054392838581951, guid: 0af1e0599763dda47be91aad1e77c51d,
+    type: 3}
   _audioSource: {fileID: 0}
   _attackSound: []
   _spawnSound: []
   _dieSound: []
   IsWondering: 0
+  IsRunAway: 0
 --- !u!82 &7262844014006088470
 AudioSource:
   m_ObjectHideFlags: 0
