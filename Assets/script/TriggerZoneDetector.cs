@@ -38,5 +38,16 @@ namespace script
                 //if( Vector3.Distance(transform.position, zombi.transform.position)>MaxDistance) Zombis.Remove(zombi);
             }
         }
+        public ZombieAgent GetTheClosest() {
+            ZombieAgent z = null;
+            float distance = Mathf.Infinity;
+            foreach (var zombie in Zombis) {
+                if (distance > Vector3.Distance(zombie.transform.position, transform.position)) {
+                    z = zombie;
+                    distance = Vector3.Distance(zombie.transform.position, transform.position);
+                }
+            }
+            return z;
+        }
     }
 }

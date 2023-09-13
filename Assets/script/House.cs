@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace script
 {
@@ -9,6 +12,7 @@ namespace script
         public GridManager GridManager;
         public int HP;
         public GameObject PrefabsDestruciotnParticules;
+        public List<Vector2Int> CellsCoordinates = new List<Vector2Int>();
         [Header("Spawn Parameters")]
         public int zombitToSpawn = 4;
         public Vector3 SpawnOffset = new Vector3(0, 0.5f, 0);
@@ -16,11 +20,21 @@ namespace script
         [Header(("Sounds"))] public AudioSource AudioSource;
         public AudioClip[] HitSounds;
 
-        private void Start()
+        [ExecuteInEditMode]
+        public void Awake()
         {
             GridManager = GridManager.Instance;
+            GridManager.OnClearPathFindingData += ClearCellCoordinateData;
             if(!GridManager) Debug.LogWarning(" GridManager non Assigner sur Maison "+name);
+            Debug.Log("Added");
         }
+        
+        private void Start()
+        {
+            
+        }
+
+        public void ClearCellCoordinateData() => CellsCoordinates.Clear();
         
         public void TakeDamage(int damage)
         {
@@ -38,6 +52,13 @@ namespace script
             if( PrefabsDestruciotnParticules)Instantiate(PrefabsDestruciotnParticules, transform.position, transform.rotation);
             ManageZombiSpawn();
             Destroy(gameObject);
+            
+        }
+        [ExecuteInEditMode]
+        private void OnDestroy()
+        {
+            GridManager.OnClearPathFindingData -= ClearCellCoordinateData;
+            Debug.Log("remove");
         }
 
         public bool IsAlive()

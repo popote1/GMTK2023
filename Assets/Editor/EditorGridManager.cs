@@ -21,15 +21,15 @@ public class EditorGridManager : Editor
       Handles.color = Color.yellow;
 
       Vector3 p1 = m_targget.Offset - new Vector3(0.5f,0,0.5f);
-      Vector3 p2 = m_targget.Offset + new Vector3(m_targget.Size.x-0.5f , 0, -0.5f);
+      Vector3 p2 = m_targget.Offset + new Vector3(m_targget.Size.x*Metrics.chunkSize-0.5f , 0, -0.5f);
       point[0] = p2;
       Handles.DrawDottedLine(p1, p2, 1);
       p1 = p2;
-      p2 = m_targget.Offset + new Vector3(m_targget.Size.x-0.5f ,0,m_targget.Size.y-1+0.5f );
+      p2 = m_targget.Offset + new Vector3(m_targget.Size.x*Metrics.chunkSize-0.5f ,0,m_targget.Size.y*Metrics.chunkSize-1+0.5f );
       point[1] = p2;
       Handles.DrawDottedLine(p1, p2, 1);
       p1 = p2;
-      p2 = m_targget.Offset + new Vector3( -0.5f,0, m_targget.Size.y-1 + 0.5f);
+      p2 = m_targget.Offset + new Vector3( -0.5f,0, m_targget.Size.y*Metrics.chunkSize-1 + 0.5f);
       point[2] = p2;
       Handles.DrawDottedLine(p1, p2, 1);
       p1 = p2;
@@ -48,7 +48,43 @@ public class EditorGridManager : Editor
       if( GUILayout.Button("CalculatTheGrid"))m_targget.GenerateCells();
       if (GUILayout.Button("DisplayCells")) m_targget.GenerateDebugCells();
       if (GUILayout.Button("CalculateColliders")) m_targget.CheckColliders();
+      if (GUILayout.Button("RecalculateChunks")) m_targget.RecalculateChunks();
+      if (GUILayout.Button("ColorChunks")) m_targget.ColorChunks();
       if (GUILayout.Button("ClearDebugsCells")) m_targget.ClearGrid();
+      GUILayout.Space(10);
+      if (GUILayout.Button("LoadLocomotionData")) m_targget.LoadLocomotionData();
+      if (GUILayout.Button("SaveLocomotionData")) m_targget.SaveLocomotionData();
       
+   }
+}
+[CustomEditor(typeof(TerrainLocomotionData))]
+public class EditorTerrainLocomotionData : Editor
+{
+   private TerrainLocomotionData m_targget;
+   public override void OnInspectorGUI()
+   {
+      base.OnInspectorGUI();
+      m_targget = (TerrainLocomotionData) target;
+      
+      EditorGUILayout.BeginHorizontal();
+      EditorGUILayout.LabelField("Chunks = ");
+      if( m_targget.Chunks==null)EditorGUILayout.LabelField("null");
+      else EditorGUILayout.LabelField(m_targget.Chunks.Length.ToString());
+      EditorGUILayout.EndHorizontal();
+      EditorGUILayout.BeginHorizontal();
+      EditorGUILayout.LabelField("Cells = ");
+      if( m_targget.Cells==null)EditorGUILayout.LabelField("null");
+      else EditorGUILayout.LabelField(m_targget.Cells.Length.ToString());
+      EditorGUILayout.EndHorizontal();
+      //if( GUILayout.Button("CalculatTheGrid"))m_targget.GenerateCells();
+      //if (GUILayout.Button("DisplayCells")) m_targget.GenerateDebugCells();
+      //if (GUILayout.Button("CalculateColliders")) m_targget.CheckColliders();
+      //if (GUILayout.Button("RecalculateChunks")) m_targget.RecalculateChunks();
+      //if (GUILayout.Button("ColorChunks")) m_targget.ColorChunks();
+      //if (GUILayout.Button("ClearDebugsCells")) m_targget.ClearGrid();
+      //GUILayout.Space(10);
+      //if (GUILayout.Button("LoadLocomotionData")) m_targget.LoadLocomotionData();
+      //if (GUILayout.Button("SaveLocomotionData")) m_targget.SaveLocomotionData();
+
    }
 }
