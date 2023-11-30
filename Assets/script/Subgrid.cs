@@ -9,6 +9,7 @@ namespace script
     {
         public Vector2Int Size;
         public Vector3 Offset;
+        
         private Cell[,] _cells;
         private List<Chunk> _chunks = new List<Chunk>();
         private Cell[] _targetCell;
