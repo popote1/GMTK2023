@@ -10,17 +10,17 @@ using Random = UnityEngine.Random;
 namespace script
 {
     [SelectionBase]
-    public class CivillianAgent : MonoBehaviour
+    public class CivillianAgent : GridAgent
     {
-        [SerializeField] private Rigidbody Rigidbody;
-        [SerializeField] private float MaxMoveSpeed;
-        [SerializeField] private float Drag;
-        [SerializeField] private GridManager GridManager;
+        //[SerializeField] private Rigidbody Rigidbody;
+        //[SerializeField] private float MaxMoveSpeed;
+        //[SerializeField] private float Drag;
+        //[SerializeField] private GridManager GridManager;
         
         [Header("Agent Parameters")] 
         [SerializeField] private int _hp = 3;
         [SerializeField]private GameObject _prefabDeathPS;
-        [SerializeField] private Animator _animator;
+        //[SerializeField] private Animator _animator;
         [Space(5)] 
         [SerializeField] private float WonderringDelayMin=1;
         [SerializeField] private float WonderringDelayMax=10;
@@ -31,7 +31,7 @@ namespace script
         [SerializeField] private int RunAwayDistance = 10;
         [Space(5)] 
         [SerializeField] private float MaxStamina = 10;
-        [SerializeField] private float MoveSpeed=15;
+        //[SerializeField] private float MoveSpeed=15;
         [SerializeField] private float RunAwayMoveSpeed =30;
         [SerializeField] private float SlowMoveSpeed = 5;
         [SerializeField] private float StaminaRegenRate = 0.5f;
@@ -50,7 +50,7 @@ namespace script
         private float _currentMoveSpeed;
         private float _currentStamina;
         private Cell _wonderingTarget;
-        private Subgrid _subgrid;
+        //private Subgrid _subgrid;
 
         public bool IsWondering;
         public bool IsRunAway;
@@ -70,14 +70,14 @@ namespace script
         }
 
         // Update is called once per frame
-        void Update() {
+        protected override void Update() {
             ManageWondering();
             ManageRunAway();
             ManageMoveSpeed();
             if (Rigidbody.velocity.magnitude > 0.5f) transform.forward = Rigidbody.velocity;
             _animator.SetFloat("Velocity", Rigidbody.velocity.magnitude/MaxMoveSpeed);
         }
-        private void FixedUpdate() {
+        protected override void FixedUpdate() {
             ManageMovement();   
         }
 
@@ -105,8 +105,8 @@ namespace script
         }
 
         private void ManageMovement() {
-            if (_subgrid!=null) {
-                Cell cell =_subgrid.GetCellFromWorldPos(transform.position);
+            if (Subgrid!=null) {
+                Cell cell =Subgrid.GetCellFromWorldPos(transform.position);
                 if (cell == null) {
                     Cell currentPos = GridManager.GetCellFromWorldPos(transform.position);
                     if (currentPos == null) {
@@ -193,10 +193,10 @@ namespace script
             Cell currentcell = GridManager.GetCellFromWorldPos(transform.position);
             _wonderingTarget = targetCell;
             List<Chunk> totalChunks = GridManager.GetAStartPath(currentcell.Chunk , _wonderingTarget.Chunk);
-            _subgrid = new Subgrid();
-            _subgrid.GenerateSubGrid(totalChunks.ToArray(), GridManager.Size, GridManager.Offset);
-            //_subgrid.StartCalcFlowfield(_subgrid.TargetCell);
-            _subgrid.StartCalcFlowfield(new[]{_wonderingTarget});
+            Subgrid = new Subgrid();
+            Subgrid.GenerateSubGrid(totalChunks.ToArray(), GridManager.Size, GridManager.Offset);
+            //_subgrid.StartCalcFlowfield(_subgrid.TargetCells);
+            Subgrid.StartCalcFlowfield(new[]{_wonderingTarget});
         }
 
         private void OnDrawGizmos()

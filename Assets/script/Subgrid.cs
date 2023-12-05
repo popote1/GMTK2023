@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,20 +10,33 @@ namespace script
     {
         public Vector2Int Size;
         public Vector3 Offset;
+
+        [NonSerialized] public Subgrid NextSubGrid;
         
         private Cell[,] _cells;
         private List<Chunk> _chunks = new List<Chunk>();
-        private Cell[] _targetCell;
+        private Cell[] _targetCellses;
 
-        public Cell[] TargetCell {
-            get => _targetCell;
+        public Cell[] TargetCells {
+            get => _targetCellses;
         }
 
         public Vector2Int TargetPos {
             get {
                 Vector2Int some =Vector2Int.zero;
-                foreach (var cell in _targetCell) some += cell.Pos;
-                return some / _targetCell.Length;
+                foreach (var cell in _targetCellses) some += cell.Pos;
+                return some / _targetCellses.Length;
+            }
+        }
+
+        public Subgrid GetLastSubgrid(int security=0)
+        {
+            if (security >= 10 || NextSubGrid == null) {
+                return this;
+            }
+            else {
+                security++;
+                return NextSubGrid.GetLastSubgrid(security);
             }
         }
 
@@ -51,7 +65,7 @@ namespace script
                     cell.MoveCost = saveCell.MoveCost; 
                 }
             }
-            StartCalcFlowfield(_targetCell);
+            StartCalcFlowfield(_targetCellses);
         }
         
         public Cell GetCellFromPos(int x, int y) {
@@ -84,7 +98,7 @@ namespace script
         
         public void StartCalcFlowfield(Cell[] origin) {
             CalculatFlowFieldC(origin);
-            _targetCell = origin;
+            _targetCellses = origin;
             Debug.Log("Start CalculateFlowField");
         }
 

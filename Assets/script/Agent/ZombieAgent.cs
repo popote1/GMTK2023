@@ -9,20 +9,20 @@ using Random = UnityEngine.Random;
 namespace script
 {
     [SelectionBase]
-    public class ZombieAgent : MonoBehaviour
+    public class ZombieAgent : GridAgent
     {
-        [SerializeField] private Rigidbody Rigidbody;
-        [SerializeField] private float MaxMoveSpeed;
-        [SerializeField] private float MoveSpeed;
-        [SerializeField] private float Drag;
-        [SerializeField] private GridManager GridManager;
-        [Header("Zombie Reference")]
-        public GameObject SelectionSprite;
-        public GameObject PSEmoteRedSquare;
+        //[SerializeField] private Rigidbody Rigidbody;
+        //[SerializeField] private float MaxMoveSpeed;
+        //[SerializeField] private float MoveSpeed;
+        //[SerializeField] private float Drag;
+        //[SerializeField] private GridManager GridManager;
+        //[Header("Zombie Reference")]
+        //public GameObject SelectionSprite;
+        //public GameObject PSEmoteRedSquare;
         [Header("Zombie Parameters")] 
         [SerializeField] private int _hp = 3;
         [SerializeField]private GameObject _prefabDeathPS;
-        [SerializeField] private Animator _animator;
+        //[SerializeField] private Animator _animator;
         [Header("Attack Parameters")]
         [SerializeField] private float _attackDelay =2;
         [SerializeField] private int _attackDamage =1;
@@ -33,15 +33,15 @@ namespace script
         [SerializeField] private AudioClip[] _spawnSound;
         [SerializeField] private AudioClip[] _dieSound;
         [Header("HeightOffSetting")] 
-        public float HeightOffSetting;
-        public LayerMask GroundLayer;
+        //public float HeightOffSetting;
+        //public LayerMask GroundLayer;
         
-        public Subgrid Subgrid;
+        //public Subgrid Subgrid;
         
         private IDestructible _target;
-        private bool _isAttcking;
+        //private bool _isAttcking;
         private float _attacktimer;
-        private bool _isSelected;
+        //private bool _isSelected;
 
         public bool IsSelected
         {
@@ -71,32 +71,32 @@ namespace script
         }
         
 
-        public void Generate(GridManager gridManager) {
-            GridManager = gridManager;
-        }
+        //public void Generate(GridManager gridManager) {
+        //    GridManager = gridManager;
+        //}
 
-        private void FixedUpdate() {
-            if (Subgrid!=null&&!_isAttcking) {
-                Cell cell =Subgrid.GetCellFromWorldPos(transform.position);
-                if (cell == null)
-                {
-                    Cell currentPos = GridManager.GetCellFromWorldPos(transform.position);
-                    if (currentPos == null) {
-                        PSEmoteRedSquare.SetActive(true);
-                        Debug.LogWarning("Zombie out of the Game Zone", this);
-                        return;
-                    }
-                    ManagerRecalculationOrExtraPathToSubGrid(currentPos);
-                    return;
-                }
-                PSEmoteRedSquare.SetActive(false);
-                Rigidbody.AddForce(new Vector3(cell.DirectionTarget.x, 0, cell.DirectionTarget.y) * MoveSpeed);
-                Rigidbody.velocity -= Rigidbody.velocity * Drag;
-                //transform.position = new Vector3(transform.position.x, 0.5f,transform.position.z );
-            }
-        }
+        //private void FixedUpdate() {
+        //    if (Subgrid!=null&&!_isAttcking) {
+        //        Cell cell =Subgrid.GetCellFromWorldPos(transform.position);
+        //        if (cell == null)
+        //        {
+        //            Cell currentPos = GridManager.GetCellFromWorldPos(transform.position);
+        //            if (currentPos == null) {
+        //                PSEmoteRedSquare.SetActive(true);
+        //                Debug.LogWarning("Zombie out of the Game Zone", this);
+        //                return;
+        //            }
+        //            ManagerRecalculationOrExtraPathToSubGrid(currentPos);
+        //            return;
+        //        }
+        //        PSEmoteRedSquare.SetActive(false);
+        //        Rigidbody.AddForce(new Vector3(cell.DirectionTarget.x, 0, cell.DirectionTarget.y) * MoveSpeed);
+        //        Rigidbody.velocity -= Rigidbody.velocity * Drag;
+        //        //transform.position = new Vector3(transform.position.x, 0.5f,transform.position.z );
+        //    }
+        //}
 
-        private void ManageAttack() {
+        protected override void ManageAttack() {
             if (_target==null||!_target.IsAlive()) {
                 _isAttcking = false;
                 Rigidbody.isKinematic = false;
@@ -112,7 +112,7 @@ namespace script
             }
         }
 
-        private void Update() {
+        protected override void Update() {
             if (_isAttcking) {
                 ManageAttack();
             }
@@ -139,14 +139,14 @@ namespace script
             }
         }
 
-        private void ManagerRecalculationOrExtraPathToSubGrid(Cell currentPos) {
-            List<Chunk> path =GridManager.GetAStartPath(currentPos.Chunk,
-                GridManager.GetCellFromPos(Subgrid.TargetPos).Chunk);
-            foreach (var neighbor in GridManager.GetNeighborsOfPath(path)) {
-                if (path.Contains(neighbor)) continue;
-                path.Add(neighbor);
-            }
-            Subgrid.AddChunksToSubGrid(path.ToArray());
-        }
+        //private void ManagerRecalculationOrExtraPathToSubGrid(Cell currentPos) {
+        //    List<Chunk> path =GridManager.GetAStartPath(currentPos.Chunk,
+        //        GridManager.GetCellFromPos(Subgrid.TargetPos).Chunk);
+        //    foreach (var neighbor in GridManager.GetNeighborsOfPath(path)) {
+        //        if (path.Contains(neighbor)) continue;
+        //        path.Add(neighbor);
+        //    }
+        //    Subgrid.AddChunksToSubGrid(path.ToArray());
+        //}
     }
 }

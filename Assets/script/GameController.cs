@@ -59,6 +59,11 @@ namespace script
                     }
                     
                     Cell targetCell = GridManager.GetCellFromWorldPos(hit.point);
+                    if (Input.GetKey(KeyCode.LeftShift)) {
+                        Debug.Log("FollowOrder");
+                        ManagerGiveExtraOrder(targetCell);
+                        return;
+                    }
                     ManagerGiveMoveOrder(targetCell);
                 }
             }
@@ -93,7 +98,7 @@ namespace script
         {
             List<Chunk> startchunks = new List<Chunk>();
             
-            List<Chunk> totalChunks = GetChunksPath(Selected, targetCell);
+            List<Chunk> totalChunks = GetChunksPathFromZombie(Selected, targetCell);
             if (totalChunks == null) return;
             Subgrid subgrid = new Subgrid();
             subgrid.GenerateSubGrid(totalChunks.ToArray(), GridManager.Size, GridManager.Offset);
@@ -103,6 +108,7 @@ namespace script
             {
                 zombieAgent.Subgrid = subgrid;
             }
+            
             GridManager.ColorAllDebugGridToColor(Color.white);
 
             foreach (var chunk in totalChunks)
@@ -132,8 +138,23 @@ namespace script
                 //        cell.ColorDebugCell(Color.yellow);
                 //    }
                 //}
-            
         }
+        public void CalculateSelectionExtraPathFinding(Cell targetCell)
+        {
+            List<Chunk> startchunks = new List<Chunk>();
+            
+            List<Chunk> totalChunks = GetChunksPathFromSubGrid(targetCell);
+            if (totalChunks == null) return;
+            Subgrid subgrid = new Subgrid();
+            subgrid.GenerateSubGrid(totalChunks.ToArray(), GridManager.Size, GridManager.Offset);
+            subgrid.StartCalcFlowfield(new []{targetCell});
+
+            foreach (var zombieAgent in Selected) {
+                zombieAgent.Subgrid.GetLastSubgrid().NextSubGrid = subgrid;
+            }
+        }
+        
+        
 
 
         public void ManageBoxSelectionDisplay() {
@@ -211,16 +232,14 @@ namespace script
             }
             
         }
-        private void ManagerGiveMoveOrder(Cell targetCell)
-        {
+        private void ManagerGiveMoveOrder(Cell targetCell) {
             Chunk target = targetCell.Chunk;
             if (target != null) {
                 if (Selected.Count > 0) {
                     CalculateSelectionPathFinding(targetCell);
                     return;
                 }
-                        
-                        
+
                 Debug.Log("Try doing A start on chunks");
                 GridManager.ColorAllDebugGridToColor(Color.white);
                 List<Chunk> list =
@@ -238,7 +257,7 @@ namespace script
                         cell.ColorDebugCell(Color.green);
                     }
                 }
-//
+
                 foreach (var chunk in GridManager.GetNeighborsOfPath(list)) {
                     foreach (var cell in chunk.cells) {
                         cell.ColorDebugCell(Color.yellow);
@@ -246,7 +265,17 @@ namespace script
                 }
             }
         }
-        private List<Chunk> GetChunksPath(List<ZombieAgent> zombie, Cell targetCell) {
+
+        private void ManagerGiveExtraOrder(Cell targetCell)
+        {
+            Chunk target = targetCell.Chunk;
+            if (target != null) {
+                if (Selected.Count > 0) {
+                    CalculateSelectionExtraPathFinding(targetCell);
+                }
+            }
+        }
+        private List<Chunk> GetChunksPathFromZombie(List<ZombieAgent> zombie, Cell targetCell) {
             List<Chunk> startchunks = new List<Chunk>();
             List<Chunk> pathChunks = new List<Chunk>();
             foreach (var ZombieAgent in Selected) {
@@ -255,6 +284,40 @@ namespace script
                     GridManager.GetCellFromWorldPos(ZombieAgent.transform.position).Chunk))
                 {
                     startchunks.Add(GridManager.GetCellFromWorldPos(ZombieAgent.transform.position).Chunk);
+                }
+            }
+
+            if (startchunks.Count == 0) {
+                Debug.LogWarning("StartChunks not founds ");
+                return null;
+            }
+
+            foreach (var chunk in startchunks) {
+                foreach (var chunkpath in GridManager.GetAStartPath(chunk, targetCell.Chunk)) {
+                    if (!pathChunks.Contains(chunkpath)) pathChunks.Add(chunkpath);
+                }
+            }
+            pathChunks.AddRange(GridManager.GetNeighborsOfPath(pathChunks));
+            return pathChunks;
+        }
+        
+        private List<Chunk> GetChunksPathFromSubGrid( Cell targetCell) {
+            List<Chunk> startchunks = new List<Chunk>();
+            List<Chunk> pathChunks = new List<Chunk>();
+            foreach (var ZombieAgent in Selected) {
+                if (ZombieAgent == null) continue;
+                if (ZombieAgent.Subgrid == null) {
+                    if (!startchunks.Contains(
+                        GridManager.GetCellFromWorldPos(ZombieAgent.transform.position).Chunk)) {
+                        startchunks.Add(GridManager.GetCellFromWorldPos(ZombieAgent.transform.position).Chunk);
+                    }
+                }
+                else {
+                    foreach (var target in ZombieAgent.Subgrid.GetLastSubgrid().TargetCells) {
+                        if (!startchunks.Contains(target.Chunk)) {
+                            startchunks.Add(target.Chunk);
+                        }
+                    }
                 }
             }
 
@@ -287,7 +350,7 @@ namespace script
             }
 
             
-            List<Chunk> totalChunks = GetChunksPath(Selected, centerCell);
+            List<Chunk> totalChunks = GetChunksPathFromZombie(Selected, centerCell);
             if (totalChunks == null) return;
             Subgrid subgrid = new Subgrid();
             subgrid.GenerateSubGrid(totalChunks.ToArray(), GridManager.Size, GridManager.Offset);
