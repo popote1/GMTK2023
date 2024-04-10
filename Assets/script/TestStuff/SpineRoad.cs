@@ -236,6 +236,7 @@ public class SpineRoad : MonoBehaviour
 
     private void OnDrawGizmos() {
         Handles.matrix = transform.localToWorldMatrix;
+        if (_p1 == null) return;
         for (int i = 0; i < _p1.Count; i++) {
             Handles.SphereHandleCap(0, _p1[i], quaternion.identity, 1, EventType.Repaint);
             Handles.SphereHandleCap(0, _p2[i], quaternion.identity, 1, EventType.Repaint);

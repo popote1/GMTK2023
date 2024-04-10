@@ -22,7 +22,7 @@ namespace script
         public float SelectionBoxMax = 10;
         public LayerMask GroundLayer;
         public LayerMask SelectingLayer;
-        public List<ZombieAgent> Selected = new List<ZombieAgent>();
+        public List<GridAgent> Selected = new List<GridAgent>();
         public GameObject DebugCube;
         
 
@@ -30,7 +30,11 @@ namespace script
         private bool _isInSelectionBox;
         private Vector2 _startSelectionBox;
 
-        private void Start() {
+        public static Action<GridAgent> AddAgentToSelection; 
+        
+        private void Start()
+        {
+            AddAgentToSelection += AddGridAGentToSelection;
             if (zombies == null || zombies.Length == 0) return;
             foreach (var z in zombies) {
                 ZombieAgent zombie = Instantiate(PrefabsZombieAgent,  z.position+ new Vector3(0, 0.5f, 0),
@@ -106,7 +110,7 @@ namespace script
 
             foreach (var zombieAgent in Selected)
             {
-                zombieAgent.Subgrid = subgrid;
+                zombieAgent.SetNewSubGrid(subgrid);
             }
             
             GridManager.ColorAllDebugGridToColor(Color.white);
@@ -148,15 +152,18 @@ namespace script
             Subgrid subgrid = new Subgrid();
             subgrid.GenerateSubGrid(totalChunks.ToArray(), GridManager.Size, GridManager.Offset);
             subgrid.StartCalcFlowfield(new []{targetCell});
-
+            
+            List<Subgrid> analizeSubgrid = new List<Subgrid>();
             foreach (var zombieAgent in Selected) {
-                zombieAgent.Subgrid.GetLastSubgrid().NextSubGrid = subgrid;
+
+                if (zombieAgent.Subgrid != null) {
+                    if( analizeSubgrid.Contains(zombieAgent.Subgrid.GetLastSubgrid()))return;
+                    zombieAgent.Subgrid.GetLastSubgrid().SetNextSubGrid( subgrid);
+                    analizeSubgrid.Add(zombieAgent.Subgrid.GetLastSubgrid());
+                }
+                else zombieAgent.SetNewSubGrid( subgrid);
             }
         }
-        
-        
-
-
         public void ManageBoxSelectionDisplay() {
             if (!_isInSelectionBox) {
                 _startSelectionBox = Input.mousePosition;
@@ -275,7 +282,7 @@ namespace script
                 }
             }
         }
-        private List<Chunk> GetChunksPathFromZombie(List<ZombieAgent> zombie, Cell targetCell) {
+        private List<Chunk> GetChunksPathFromZombie(List<GridAgent> zombie, Cell targetCell) {
             List<Chunk> startchunks = new List<Chunk>();
             List<Chunk> pathChunks = new List<Chunk>();
             foreach (var ZombieAgent in Selected) {
@@ -358,7 +365,7 @@ namespace script
             
             foreach (var zombieAgent in Selected)
             {
-                zombieAgent.Subgrid = subgrid;
+                zombieAgent.SetNewSubGrid(subgrid);
             }
 
 
@@ -369,6 +376,12 @@ namespace script
                 if (zombie != null) zombie.IsSelected = false;
             }
             Selected.Clear();
+        }
+
+        public void AddGridAGentToSelection(GridAgent gridAgent) {
+            if (gridAgent == null) return;
+            Selected.Add(gridAgent);
+            gridAgent.IsSelected = true;
         }
     }
     

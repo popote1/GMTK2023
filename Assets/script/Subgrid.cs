@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 
 namespace script
 {
-    public class Subgrid 
+    public class Subgrid :ICloneable
     {
         public Vector2Int Size;
         public Vector3 Offset;
 
-        [NonSerialized] public Subgrid NextSubGrid;
+        [NonSerialized] public  Subgrid NextSubGrid;
         
         private Cell[,] _cells;
         private List<Chunk> _chunks = new List<Chunk>();
@@ -29,6 +30,11 @@ namespace script
             }
         }
 
+        
+        public void SetNextSubGrid(Subgrid subgrid)=> NextSubGrid = subgrid;
+           
+        
+
         public Subgrid GetLastSubgrid(int security=0)
         {
             if (security >= 10 || NextSubGrid == null) {
@@ -39,7 +45,6 @@ namespace script
                 return NextSubGrid.GetLastSubgrid(security);
             }
         }
-
 
         public void GenerateSubGrid(Chunk[] chunks, Vector2Int size, Vector3 offset) {
             Size = size;
@@ -99,7 +104,6 @@ namespace script
         public void StartCalcFlowfield(Cell[] origin) {
             CalculatFlowFieldC(origin);
             _targetCellses = origin;
-            Debug.Log("Start CalculateFlowField");
         }
 
         public void StartAttackBuilding(Cell[] targets) {
@@ -188,7 +192,18 @@ namespace script
                 }
                 openList.Remove(cell);
             }
-            Debug.Log("FlowField Calculated");
+            
+        }
+
+        public object Clone() {
+            Subgrid clone = new Subgrid();
+            clone._cells = _cells;
+            clone._chunks = _chunks;
+            clone._targetCellses = TargetCells;
+            clone.Offset = Offset;
+            clone.NextSubGrid = NextSubGrid;
+            clone.Size = Size;
+            return clone;
         }
     }
 }

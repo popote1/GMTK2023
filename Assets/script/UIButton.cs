@@ -14,10 +14,8 @@
 
     
 
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            if (IsSelectable)
-            {
+        public virtual void OnPointerEnter(PointerEventData eventData) {
+            if (IsSelectable) {
                 transform.DOPause();
                 transform.localScale = Vector3.one;
                 transform.eulerAngles = Vector3.zero;
@@ -26,10 +24,9 @@
             }
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        public virtual void OnPointerExit(PointerEventData eventData)
         {
-            if (IsSelectable)
-            {
+            if (IsSelectable) {
                 transform.DOPause();
                 transform.localScale = Vector3.one * AnimationSize;
                 transform.eulerAngles = AnimationRotation;

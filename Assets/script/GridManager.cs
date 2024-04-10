@@ -48,12 +48,13 @@ namespace script
             {
                 Instance = this;
             }
+            GenerateCells();
+            CheckColliders();
         }
 
         public void Start()
         {
-            GenerateCells();
-            CheckColliders();
+            
         }
 
         public void Update()
@@ -81,6 +82,16 @@ namespace script
         {
             pos = pos - Offset;
             return GetCellFromPos(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.z));
+        }
+
+        public Cell[] GetCellsFromTransforms(Transform[] transforms) {
+            List<Cell> cells = new List<Cell>();
+            for (int i = 0; i < transforms.Length; i++) {
+                if (transforms[i] == null) continue;
+                Cell cell = GetCellFromWorldPos(transforms[i].position);
+                if(!cells.Contains(cell))cells.Add(cell);
+            }
+            return cells.ToArray();
         }
 
         public Chunk GetChunk(int x, int y)

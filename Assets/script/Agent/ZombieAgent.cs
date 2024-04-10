@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -12,14 +13,15 @@ namespace script
     public class ZombieAgent : GridAgent
     {
         //[SerializeField] private Rigidbody Rigidbody;
-        //[SerializeField] private float MaxMoveSpeed;
-        //[SerializeField] private float MoveSpeed;
-        //[SerializeField] private float Drag;
+        //[SerializeField] private float _maxMoveSpeed;
+        //[SerializeField] private float _moveSpeed;
+        //[SerializeField] private float _speedModulator;
         //[SerializeField] private GridManager GridManager;
         //[Header("Zombie Reference")]
         //public GameObject SelectionSprite;
         //public GameObject PSEmoteRedSquare;
         [Header("Zombie Parameters")] 
+        [SerializeField] private int _hpMax = 3;
         [SerializeField] private int _hp = 3;
         [SerializeField]private GameObject _prefabDeathPS;
         //[SerializeField] private Animator _animator;
@@ -32,34 +34,32 @@ namespace script
         [SerializeField] private AudioClip[] _attackSound;
         [SerializeField] private AudioClip[] _spawnSound;
         [SerializeField] private AudioClip[] _dieSound;
+
+        [Header("TransformationParameters")] 
+        [SerializeField] private float _transformationTime;
+        [SerializeField] private ZombieAgent _prefabZombieAgent;
+
         [Header("HeightOffSetting")] 
-        //public float HeightOffSetting;
-        //public LayerMask GroundLayer;
-        
-        //public Subgrid Subgrid;
-        
-        private IDestructible _target;
-        //private bool _isAttcking;
+        private IDestructible _desctructibleTarget;
+
+        private GridAgent _grabbedTarget; 
         private float _attacktimer;
-        //private bool _isSelected;
+        private bool _isTransformting;
+        private float _transformationTimer;
 
-        public bool IsSelected
-        {
-            get => _isSelected;
-            set {
-                if (SelectionSprite) SelectionSprite.SetActive(value);
-                _isSelected = value;
-            }
-        }
 
-        public void Start() {
+        protected override void Start() {
             StaticData.ZombieCount++;
             StaticData.OnZombieGain?.Invoke();
             _audioSource.clip = _spawnSound[Random.Range(0, _spawnSound.Length)];
             _audioSource.Play();
+            base.Start();
         }
 
         public void OnDestroy() => StaticData.ZombieLose();
+        public float GetNormalizeHp() => (float) _hp / _hpMax;
+        public float GetNormalizeTransformation() =>  _transformationTimer / _transformationTime;
+        public bool IsTransforming() => _isTransformting;
 
         public void TakeDamage(int damage)
         {
@@ -69,41 +69,53 @@ namespace script
                 Destroy(gameObject);
             }
         }
-        
-
-        //public void Generate(GridManager gridManager) {
-        //    GridManager = gridManager;
-        //}
-
-        //private void FixedUpdate() {
-        //    if (Subgrid!=null&&!_isAttcking) {
-        //        Cell cell =Subgrid.GetCellFromWorldPos(transform.position);
-        //        if (cell == null)
-        //        {
-        //            Cell currentPos = GridManager.GetCellFromWorldPos(transform.position);
-        //            if (currentPos == null) {
-        //                PSEmoteRedSquare.SetActive(true);
-        //                Debug.LogWarning("Zombie out of the Game Zone", this);
-        //                return;
-        //            }
-        //            ManagerRecalculationOrExtraPathToSubGrid(currentPos);
-        //            return;
-        //        }
-        //        PSEmoteRedSquare.SetActive(false);
-        //        Rigidbody.AddForce(new Vector3(cell.DirectionTarget.x, 0, cell.DirectionTarget.y) * MoveSpeed);
-        //        Rigidbody.velocity -= Rigidbody.velocity * Drag;
-        //        //transform.position = new Vector3(transform.position.x, 0.5f,transform.position.z );
-        //    }
-        //}
-
+       
         protected override void ManageAttack() {
-            if (_target==null||!_target.IsAlive()) {
-                _isAttcking = false;
+            
+            if(_desctructibleTarget!=null) ManageDestructibleAttack();
+            if(_grabbedTarget!=null) ManageGrabAttack();
+
+            if ((_desctructibleTarget==null||!_desctructibleTarget.IsAlive())&&_grabbedTarget==null)
+            {
+                _desctructibleTarget = null;
+                ChangeStat(GridActorStat.Idle);
                 Rigidbody.isKinematic = false;
+                Debug.Log("AttackFinish");
             }
+            
+        }
+
+        private void ManageGrabAttack() {
+            _grabbedTarget.transform.forward = transform.position - _grabbedTarget.transform.position;
+            transform.forward =  _grabbedTarget.transform.position -transform.position ;
+            _grabbedTarget.transform.position = transform.position + transform.forward * 0.4f;
+            _transformationTimer += Time.deltaTime;
+            if (_transformationTimer >= _transformationTime) {
+                TransformGrabbedTarget();
+                return;
+            }
+            
+            _animator.SetBool("IsGrabbing", true);
+        }
+
+        private void TransformGrabbedTarget()
+        {
+            ZombieAgent z =Instantiate(_prefabZombieAgent,  _grabbedTarget.transform.position, _grabbedTarget.transform.rotation);
+            z.Generate(GridManager);
+            z.SetNewSubGrid(Subgrid);
+            Instantiate(_prefabDeathPS, transform.position, Quaternion.identity);
+            Destroy(_grabbedTarget.gameObject);
+            _animator.SetBool("IsGrabbing", false);
+            ChangeStat(GridActorStat.Idle);
+            if (IsSelected) GameController.AddAgentToSelection.Invoke(z);
+            _isTransformting = false;
+            
+        }
+
+        private void ManageDestructibleAttack() {
             _attacktimer += Time.deltaTime;
             if (_attacktimer >= _attackDelay) {
-                _target.TakeDamage(_attackDamage);
+                _desctructibleTarget.TakeDamage(_attackDamage);
                 _attacktimer = 0;
                 _animator.SetTrigger("Attack");
                 _audioSource.clip = _attackSound[Random.Range(0, _attackSound.Length)];
@@ -113,40 +125,42 @@ namespace script
         }
 
         protected override void Update() {
-            if (_isAttcking) {
-                ManageAttack();
-            }
-            else
-            {
-                if (Rigidbody.velocity.magnitude > 0.5f) transform.forward = Rigidbody.velocity;
-                RaycastHit hit;
-                if (Physics.Raycast(new Ray(transform.position, Vector3.down), out hit, 4, GroundLayer)) {
-                    transform.position = new Vector3(transform.position.x, hit.point.y + HeightOffSetting, transform.position.z);
-                }
-            }
-            _animator.SetFloat("Velocity", Rigidbody.velocity.magnitude/MaxMoveSpeed);
+            base.Update();
+            _animator.SetFloat("Velocity", Rigidbody.velocity.magnitude/_maxMoveSpeed);
         }
 
         private void OnCollisionEnter(Collision other) {
             if (other.gameObject.CompareTag("Destructible")) {
                 if (other.gameObject.GetComponent<IDestructible>()!=null) {
-                    _target = other.gameObject.GetComponent<IDestructible>();
-                    _isAttcking = true;
+                    _desctructibleTarget = other.gameObject.GetComponent<IDestructible>();
+                    ChangeStat(GridActorStat.Attack);
                     Rigidbody.velocity = Vector3.zero;
                     transform.forward = other.transform.position -transform.position;
                     Rigidbody.isKinematic = true;
+                    return;
                 }
+            }
+
+            if (other.gameObject.GetComponent<GridAgent>() ) {
+                GridAgent target = other.gameObject.GetComponent<GridAgent>();
+                if (!target.IsGrabable || target.Stat == GridActorStat.Grabed||_grabbedTarget!=null) return;
+                _grabbedTarget = target;
+                _grabbedTarget.SetAsGrabbed();
+                _transformationTimer = 0;
+                _isTransformting = true;
+                ChangeStat(GridActorStat.Attack);
             }
         }
 
-        //private void ManagerRecalculationOrExtraPathToSubGrid(Cell currentPos) {
-        //    List<Chunk> path =GridManager.GetAStartPath(currentPos.Chunk,
-        //        GridManager.GetCellFromPos(Subgrid.TargetPos).Chunk);
-        //    foreach (var neighbor in GridManager.GetNeighborsOfPath(path)) {
-        //        if (path.Contains(neighbor)) continue;
-        //        path.Add(neighbor);
-        //    }
-        //    Subgrid.AddChunksToSubGrid(path.ToArray());
-        //}
+        protected override void GetToMoveTarget()
+        {
+            Debug.Log("Arrive at target");
+            base.GetToMoveTarget();
+        }
+        
+        protected override void ChangeStat(GridActorStat stat) {
+            if (stat == GridActorStat.Move && (_desctructibleTarget != null||_grabbedTarget!=null))return;
+            base.ChangeStat(stat);
+        }
     }
 }

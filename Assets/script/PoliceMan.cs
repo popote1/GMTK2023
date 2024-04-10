@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
 
 namespace script
 {
-    public class PoliceMan:MonoBehaviour
+    public class PoliceMan:GridAgent
     {
         public TriggerZoneDetector TriggerZoneDetector;
-        public Animator Animator;
         [Header("Attacks")] 
         public float AttackDelay;
         public int AttackDamage;
@@ -18,7 +18,7 @@ namespace script
         public ZombieAgent Target;
         [Header("Death")]
         public ZombieAgent PrefabsZombieAgent;
-        public GridManager GridManager;
+        
         public GameObject PrefabsDeathPS;
         [Header("Sound")]
         public AudioSource AudioSource;
@@ -29,27 +29,45 @@ namespace script
         
         private float _timer;
 
-        public void Start()
+        protected override void Start()
         {
-            GridManager = GridManager.Instance;
-            if( !GridManager) Debug.LogWarning(" GridManager non Assigner sur Maison "+name);
             TriggerZoneDetector.MaxDistance = AttackRange;
             TriggerZoneDetector.transform.GetComponent<SphereCollider>().radius = AttackRange;
+            base.Start();
         }
 
-        public void Update()
-        {
-            if (Target == null) {
-                TriggerZoneDetector.CheckOfNull();
-                if (TriggerZoneDetector.Zombis.Count > 0)
-                {
-                    Target =GetTheClosest(TriggerZoneDetector.Zombis);
-                    AudioSource.clip = GettingTarget[Random.Range(0, GettingTarget.Length)];
-                    AudioSource.Play();
-                }
+        protected override void Update() {
+            
+            _animator.SetBool("HaveTarget", Target!= null);
+            base.Update();
+        }
+
+        protected override void ManageStat() {
+            base.ManageStat();
+            if (Stat == GridActorStat.Idle || Stat == GridActorStat.Move) { 
+                ManageLookingForTarget();
             }
-            else ManagerFire();
-            Animator.SetBool("HaveTarget", Target!= null);
+        }
+
+        private void ManageLookingForTarget() {
+            TriggerZoneDetector.CheckOfNull();
+            
+            if (TriggerZoneDetector.Zombis.Count <= 0) return;
+            Target =GetTheClosest(TriggerZoneDetector.Zombis);
+            AudioSource.clip = GettingTarget[Random.Range(0, GettingTarget.Length)];
+            AudioSource.Play();
+            ChangeStat(GridActorStat.Attack);
+
+        }
+
+        protected override void ManageAttack()
+        {
+            if (Target == null) ManageLookingForTarget();
+            if (Target == null) {
+                ChangeStat(GridActorStat.Idle);
+                return;
+            }
+            ManagerFire();
         }
 
         public void ManagerFire() {
@@ -82,15 +100,15 @@ namespace script
             return z;
         }
 
-        private void OnCollisionEnter(Collision other) {
-            if (other.gameObject.CompareTag("Zombi")) {
-                ZombieAgent z =Instantiate(PrefabsZombieAgent, transform.position, quaternion.identity);
-                z.Generate(GridManager);
-                Instantiate(PrefabsDeathPS, transform.position, Quaternion.identity);
-                AudioSource.PlayClipAtPoint(GetKill[Random.Range(0,GetKill.Length)], transform.position);
-                Destroy(gameObject);
-            }
-        }
+        //private void OnCollisionEnter(Collision other) {
+        //    if (other.gameObject.CompareTag("Zombi")) {
+        //        ZombieAgent z =Instantiate(PrefabsZombieAgent, transform.position, quaternion.identity);
+        //        z.Generate(GridManager);
+        //        Instantiate(PrefabsDeathPS, transform.position, Quaternion.identity);
+        //        AudioSource.PlayClipAtPoint(GetKill[Random.Range(0,GetKill.Length)], transform.position);
+        //        Destroy(gameObject);
+        //    }
+        //}
 
         private void OnDrawGizmos() {
             if (EditorControlStatics.DisplayEnnemisDangerZone) {
