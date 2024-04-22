@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using script;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnitStartOrder : MonoBehaviour
@@ -15,7 +10,7 @@ public class UnitStartOrder : MonoBehaviour
         public bool IsLoop;
 
         public Transform[] Targets;
-        private Vector2Int originChunkTarget = new Vector2Int(0, 0);
+        protected Vector2Int originChunkTarget = new Vector2Int(0, 0);
     
     
         void Start() {
@@ -120,7 +115,6 @@ public class UnitStartOrder : MonoBehaviour
             pathChunks.AddRange(GridManager.GetNeighborsOfPath(pathChunks));
             return pathChunks;
         }
-
         private void OnDrawGizmos() {
             if (Targets.Length > 0&& EditorControlStatics.DisplayGizmos) {
                 for (int i = 0; i < Targets.Length; i++) {
